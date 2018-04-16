@@ -8,6 +8,8 @@
  * Last Modified: April 14 2018
 */
 
+import java.util.Random; 
+
 public class Travel {
 	private final static int [][] REQUIREMENTS = {
 										{0, 0, 0, 0, 0}, // no reqs to get to earth
@@ -55,4 +57,9 @@ public class Travel {
 		return baseProbability + baseProbability * multiplier;          // max score is 50 (yahtzee), max chance is 100%    
 	}
 	
+	public boolean attemptTravel(double successRate) {
+		Random numGenerator = new Random();
+		double chance = numGenerator.nextDouble();  // returns a random integer 0 - .99 
+		return successRate >= chance; // since chance is a random number 0 - .99 and can be anywhere in between with equal probability
+	}								// there is a successRate% chance that it is less than success rate. 
 }
