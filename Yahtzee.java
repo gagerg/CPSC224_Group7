@@ -1,88 +1,68 @@
-/* 
- * The class Yahtzee handles the configuration for a game of 1-player Yahtzee
- * It stores the number of sides, number of dice, and number of turns in
- * local variables and to a config file so that a user can have the same
- * configuration from game to game. It allows the user to opt to change the
- * configuration and, if they do so, stores the new configuration to the file. 
- * Assignment 6
- * @author Alexa Andrews
- * Date Created: March 7 2018
- * Last Modified: March 22 2018
-*/
-
-import java.io.*;
+/*
+ * This program simulates one game of yahtzee for the
+ * and displays all possible scores for the turn based on the final roll
+ * CPSC 224-01 Spring 2018
+ * @author Andrew Brodhead
+ * Version v2.1 3/22/2018
+ * 
+ */
 import java.util.*;
+import java.io.*;
+
 
 public class Yahtzee {
-	private int numSides = 6;
-	private int numDice = 5;
-	private int numTurns = 3;
-	
-	
-	/*
-    * This method sets the fields to those stored in file yahtzeeConfig.txt
-    * It then allows the user to opt to change these fields. If they choose
-    * to do so, their inputs will override those in the yahtzeeConfig.txt file
-    * @parameters Scanner because this method takes user input and having
-    * more than one Scanner object results in errors. 
- 	* @returns nothing 
- 	* @throw - throws FileNotFoundException if yahtzeeConfig.txt does not exist
- 	*/
-	public void determineConfig (Scanner in) 
-								throws FileNotFoundException {
-		Scanner input = new Scanner(new File("yahtzeeConfig.txt"));
-        numSides = input.nextInt();
-        numDice = input.nextInt();
-        numTurns = input.nextInt();
-        
-        System.out.println("You are playing with " + numDice + " " + numSides + "-sided dice.");
-        System.out.println("You get " + numTurns + " rolls per hand.\n");
-        System.out.print("Enter \"y\" if you would like to change the configuration: ");
-        String change = in.nextLine();
-        if(change.equals("y")) {
-        	System.out.print("\nEnter the number of sides on each die: ");
-        	numSides = in.nextInt();
-        	System.out.print("\nEnter the number of dice in play: ");
-        	numDice = in.nextInt();
-        	System.out.print("\nEnter the number of rolls per hand: ");
-        	numTurns = in.nextInt();
-        	PrintStream output = new PrintStream(new File("yahtzeeConfig.txt"));
-        	output.println(numSides);
-        	output.println(numDice);
-        	output.println(numTurns); 
-            System.out.println("\nYou are playing with " + numDice + " " + numSides + "-sided dice.");
-            System.out.println("You get " + numTurns + " rolls per hand.\n");
-        }
-        input.close();
+	/**
+	 * main function that loops while user wants to continue playing turns
+	 * @param args
+	 */
+	public static void main(String[] args) throws FileNotFoundException{
+		
+		//turn loop
+		Scanner input = new Scanner(System.in);
+		String playAgain = "y";
+		while(playAgain.equals("y")) {
+			Scanner configs = new Scanner(new File("yahtzeeConfig.txt"));
+			int numSides = configs.nextInt();
+			int numDice = configs.nextInt();
+			int numRolls = configs.nextInt();
+			System.out.println("you are playing with " + numDice + " " + numSides + "-sided dice");
+			System.out.println("you get " + numRolls + " rolls per hand");
+			System.out.print("\nenter 'y' if you would like to change the config ");
+			if(input.nextLine().equals("y")){
+				System.out.print("enter the number of sides on each die ");
+				numSides = input.nextInt();
+				System.out.print("enter the number of dice in play ");
+				numDice = input.nextInt();
+				System.out.print("enter the number of rolls per hand ");
+				numRolls = input.nextInt();
+				System.out.println();
+				input.nextLine();
+				PrintStream out = new PrintStream(new File("yahtzeeConfig.txt"));
+				out.println(numSides);
+				out.println(numDice);
+				out.println(numRolls);
+			} else {
+				int scoresLeft = 7+numSides;
+				boolean[] linesUsed = new boolean[scoresLeft];
+				Scorecard sc = new Scorecard(numSides,linesUsed);
+				while(scoresLeft > 0) {
+					//play one turn
+					Turn t = new Turn(numRolls,numDice,numSides);
+					int[] roll = t.play();
+					sc.calculate(roll);
+					sc.display();
+					System.out.print("enter line number to score this turn ");
+					sc.select(input.nextInt());
+					scoresLeft--;
+				}
+				//check if user wants to play another game
+				System.out.println("\nFinal Score");
+				sc.displayFinal();
+				input.nextLine();
+				System.out.print("\nEnter 'y' to play again ");
+				playAgain = input.nextLine();
+			}
+		}
 	}
 	
-	/*
-    * This function allows a user to get the number of sides
-    * @parameters this function requires no parameters
- 	* @returns int representing the number of sides
- 	* @throw - no exceptions are thrown by this function 
- 	*/
-	public int getSides() {
-		return numSides;
-	}
-	
-	/*
-    * This function allows a user to get the number of dice
-    * @parameters this function requires no parameters
- 	* @returns int representing the number of dice
- 	* @throw - no exceptions are thrown by this function 
- 	*/
-	public int getDice() {
-		return numDice;
-	}
-	
-	/*
-    * This function allows a user to get the number of turns
-    * @parameters this function requires no parameters
- 	* @returns int representing the number of turns
- 	* @throw - no exceptions are thrown by this function 
- 	*/
-	public int getTurns() {
-		return numTurns;
-	}
 }
