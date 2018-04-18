@@ -3,7 +3,7 @@
  * overall resources and resources gained on a planet. It
  * also maintains the modifiers for each planet.
  * Journey to Pluto
- * @authors Alexa Andrews, Gate Gutmann, Andrew Brodhead 
+ * @authors Alexa Andrews, Gage Gutmann, Andrew Brodhead 
  * Date Created: April 14 2018
  * Last Modified: April 14 2018
 */
@@ -16,7 +16,7 @@ public class Resources {
 										{5, 7, 5, 4, 6}, // multipliers for Saturn
 										{9, 6, 7, 2, 7}, // multipliers for Uranus
 										{5, 2, 3, 6, 2}, // multipliers for Neptune
-										{0, 0, 0, 0, 0} // no multipliers for Pluto
+										{0, 0, 0, 0, 0} // no multipliers for Pluto // Shouldnt need this
 									};
 	private static final Exception InsufficientResourcesException = null;
 	private int [] resources; 
