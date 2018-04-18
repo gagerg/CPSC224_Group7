@@ -10,27 +10,17 @@
 
 public class Resources {
 	private final static int [][] MULTIPLIERS = {
-										{2, 5, 5, 4, 2}, // multipliers for earth
-										{3, 3, 1, 3, 3}, // multipliers for Mars
-										{2, 7, 2, 7, 4}, // multipliers or Jupiter
-										{5, 7, 5, 4, 6}, // multipliers for Saturn
-										{9, 6, 7, 2, 7}, // multipliers for Uranus
-										{5, 2, 3, 6, 2}, // multipliers for Neptune
-										{0, 0, 0, 0, 0} // no multipliers for Pluto // Shouldnt need this
-									};
+							{2, 5, 5, 4, 2}, // multipliers for earth
+							{3, 3, 1, 3, 3}, // multipliers for Mars
+							{2, 7, 2, 7, 4}, // multipliers or Jupiter
+							{5, 7, 5, 4, 6}, // multipliers for Saturn
+							{9, 6, 7, 2, 7}, // multipliers for Uranus
+							{5, 2, 3, 6, 2}, // multipliers for Neptune
+							};
 	private int [] resources; 
-	private final int [] onPlanetResources;
-        private final int [] requiredEarth = {150, 450, 400, 200, 100}; //Might have to fix these if to high
-        private final int [] requiredMars = {350, 300, 200, 150, 200};
-        private final int [] requiredJupiter = {200, 300, 100, 150, 50};
-        private final int [] requiredSaturn = {500, 375, 300, 350, 200};
-        private final int [] requiredUranus = {350, 400, 450, 250, 300}; //Hehe
-        private final int [] requiredNeptune = {400, 300, 200, 100, 350};
-        private final int [] requiredPluto = {500, 500, 500, 500, 500};
-        
-        
-	
-	/*
+	private int [] onPlanetResources;
+     
+    /*
     * Resources initializes its resource arrays to size 5 for 5 resources
     * @parameters none
 	* @returns nothing 
@@ -111,13 +101,10 @@ public class Resources {
 	 * @returns nothing
 	 * @throw - InsufficientResourcesException if the player doesnt have enough resources to travel
 	 */
-	public void useResourcesForTravel(int [] usedResources) throws Exception { // I'm not good with exceptions
-		if (!canTravel(usedResources)) 
+	public void useResourcesForTravel(int [] usedResources) {
 		for (int i = 0; i < 5; i++) {
 			resources[i] -= usedResources[i];
 			onPlanetResources[i] = 0; // travel is occurring; zero out onPlanetResources 
-		}
-		
-		
+		}	
 	}
 }
