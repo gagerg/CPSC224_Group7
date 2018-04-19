@@ -2,13 +2,16 @@
  * Screentester.java
  * runs a test to simulate game flow from one screen to the next
  * By Andrew Brodhead
- * V1.1 - edited 4/18 added player select screen
+ * V1.2 - edited 4/18 added player select screen
+ * 		- edited 4/19 added ok from  ^ button to continue to first turn
  */
 import java.util.*;
 import java.awt.*;
 import javax.swing.*;
 
 public class screenTester{
+	private static int numberPlayers; 
+	private static String[] playerNames;
 	public static void main(String[] args) {
 		//set up frame
 		JFrame frame = new JFrame("Race to Pluto!");
@@ -22,8 +25,9 @@ public class screenTester{
 		
 		//counter and tick are just for testing procedures, should not be part of main game flow
 		int c = 0;
+		System.out.print("waiting for user to start");
 		while(!start.isStartClicked()) {
-			if(tick(c)) System.out.println("waiting for user to start");
+			if(tick(c)) System.out.print(".");
 			c++;
 		}
 		
@@ -34,16 +38,28 @@ public class screenTester{
 		frame.add(pselect);
 		frame.setVisible(true);
 		
+		System.out.print("waiting for user to 'OK' player names");
 		while(!pselect.isOkClicked()) {
-			if(tick(c)) System.out.println("waiting for user to 'OK' player names");
+			if(tick(c)) System.out.print(".");
 			c++;
 		}
+		//number of players has been entered, proceed to first player turn
+		playerNames = pselect.getNames();
+		numberPlayers = pselect.getNumberPlayers();
 		System.out.println("removing pselect");
-		
+		frame.remove(pselect);
+		//frame.add(nextFrame);
+		frame.setVisible(true);
 	}
 	public static boolean tick(int counter) {
-		//outputs a wait message every 1000000000 loop cycles
-		return (counter%1000000000 == 0);
+		//outputs a wait message every 200000000 loop cycles, kind of cpu expensive.
+		//final project should use one of many java timer implementations.
+		//necessary because events happen like key presses in CPEN231 lab
+		if(counter%200000000 == 1000) {
+			counter = 0;
+			return true;
+		}
+		else return false;
 	}
 	
 }

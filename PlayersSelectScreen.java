@@ -2,10 +2,10 @@
  * PlayersSelectScreen.java
  * a JLayered Pane that holds a header line and four panels that allow the user to enter up to four player names
  * by Andrew Brodhead
- * V 1.0
+ * V 1.1 - edited 4/19 added okay button and validation for number of players
  * 
  * 
- * to do: add continue button, input validation for less than two names, ?limit size of player names?,
+ * to do: ?limit size of player names?
  */
 import java.util.*;
 import java.awt.*;
@@ -16,11 +16,12 @@ public class PlayersSelectScreen extends JLayeredPane{
 	
 	private JLabel backgroundPanel;
 	private ImageIcon backgroundImg = new ImageIcon("pselectbackground.png");
-	private String[] pnames = {"player 1", "player 2", "", ""};
+	private ImageIcon okButtonImg = new ImageIcon("okButton.png");
+	private String[] defaultPnames = {"player 1", "player 2", "", ""};
 	//lower part of screen will be divided into four quartiles, each with a box to enter player name
 	private JPanel[] playerNamePanels;
 	private JTextField[] nameBoxes;
-	private int numberPlayers = 2;
+	private JPanel buttonPanel = new JPanel();
 	private boolean okClicked = false;
 	
 	public PlayersSelectScreen() {
@@ -29,6 +30,10 @@ public class PlayersSelectScreen extends JLayeredPane{
 		backgroundPanel.setBounds(0,0,800,600);
 		add(backgroundPanel, new Integer(0));
 		initNamePanels();
+		buttonPanel.setOpaque(false);
+		buttonPanel.setBounds(600,50,160,90);
+		buttonPanel.add(new OkButton(okButtonImg));
+		add(buttonPanel, new Integer(2));
 	}
 	
 	/**
@@ -43,7 +48,10 @@ public class PlayersSelectScreen extends JLayeredPane{
 			playerNamePanels[i].setOpaque(false);
 			add(playerNamePanels[i], new Integer(1));
 			playerNamePanels[i].add(nameBoxes[i]);
-			nameBoxes[i].setText(pnames[i]);	
+			nameBoxes[i].setText(defaultPnames[i]);	
+			//nameBoxes[i].setOpaque(false); // for invisible text boxes
+			nameBoxes[i].setBackground(Color.black);
+			nameBoxes[i].setForeground(Color.yellow);
 		}
 		
 		playerNamePanels[0].setBounds(0, 200, 400, 150);
@@ -56,7 +64,11 @@ public class PlayersSelectScreen extends JLayeredPane{
 	 * returns the array of names of the players as an array of Strings
 	 */
 	public String[] getNames() {
-		return pnames;
+		String[] names = new String[4];
+		for(int i = 0; i < 4; i++) {
+			names[i] = nameBoxes[i].getText();
+		}
+		return names;
 	}
 	
 	/*
@@ -64,14 +76,42 @@ public class PlayersSelectScreen extends JLayeredPane{
 	 * should eventually throw an exception if there are less than two players.
 	 */
 	public int getNumberPlayers() {
-		return numberPlayers;
+		int playerCount = 0;
+		String[] names = getNames();
+		for(int i = 0; i < 4; i++) {
+			if(names[i].length() > 0) playerCount++;
+		}
+		return playerCount;
 	}
 	
 	/*
-	 * returns a boolen of whether the okay button has been clicked
+	 * returns a boolean of whether the okay button has been clicked
 	 * main program will check to see if it can move on to the next frame
 	 */
 	public boolean isOkClicked() {
+		if(okClicked){
+			if(getNumberPlayers() < 2) {
+				System.out.println("user clicked OK with too few players(" + getNumberPlayers() + ")");
+				System.out.print("waiting for user to 'OK' player names");
+				okClicked = false;
+			} else System.out.println("user clicked okay with " + getNumberPlayers() + " players");
+		}
 		return okClicked;
+	}
+	
+	/*
+	 * a button class that creates an "OK" button. When clicked, toggles the okClicked flag,
+	 * telling program to advance to next screen
+	 */
+	private class OkButton extends JLabel{
+		public OkButton(ImageIcon img) {
+			super(img);
+			addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent e) {
+					System.out.println("OK clicked");
+					okClicked = true;
+				}
+			});
+		}
 	}
 }
