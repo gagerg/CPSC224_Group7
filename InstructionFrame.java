@@ -1,7 +1,7 @@
 /**
  * InstructionFrame.java
  * creates a new popup window in which instructions will be housed
- * By Andrew Brodhead
+ * By Andrew Brodhead,
  * V 1.0
  */
 import javax.swing.JFrame;

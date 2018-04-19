@@ -4,6 +4,7 @@
  * By Andrew Brodhead
  * V1.2 - edited 4/18 added player select screen
  * 		- edited 4/19 added ok from  ^ button to continue to first turn
+ * 		- edited 4/19 added RollScreen
  */
 import java.util.*;
 import java.awt.*;
@@ -43,14 +44,27 @@ public class screenTester{
 			if(tick(c)) System.out.print(".");
 			c++;
 		}
+		
 		//number of players has been entered, proceed to first player turn
 		playerNames = pselect.getNames();
 		numberPlayers = pselect.getNumberPlayers();
+		
+		//At this point game should construct an array of Player objects, initialize them with
+		//player names, and determine turn order(somehow). If we decide to do roll for turn order, those
+		//buttons will be in pselect name. Otherwise, it might just randomly decide by randomly sorting the
+		//player array.
 		System.out.println("removing pselect");
 		frame.remove(pselect);
-		//frame.add(nextFrame);
+		
+		//test player, creates a rollScreen with playername Gregor on planet 3(Saturn)
+		RollScreen roll = new RollScreen("Gregor", 3);
+		frame.add(roll);
 		frame.setVisible(true);
 	}
+	/*
+	 * This function won't be in the actual game.java file, just used for outputting test messages between
+	 * events.
+	 */
 	public static boolean tick(int counter) {
 		//outputs a wait message every 200000000 loop cycles, kind of cpu expensive.
 		//final project should use one of many java timer implementations.

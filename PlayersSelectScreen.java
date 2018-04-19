@@ -15,24 +15,23 @@ import javax.swing.*;
 public class PlayersSelectScreen extends JLayeredPane{
 	
 	private JLabel backgroundPanel;
-	private ImageIcon backgroundImg = new ImageIcon("pselectbackground.png");
-	private ImageIcon okButtonImg = new ImageIcon("okButton.png");
 	private String[] defaultPnames = {"player 1", "player 2", "", ""};
 	//lower part of screen will be divided into four quartiles, each with a box to enter player name
 	private JPanel[] playerNamePanels;
 	private JTextField[] nameBoxes;
 	private JPanel buttonPanel = new JPanel();
 	private boolean okClicked = false;
+	private Font font = new Font(Font.MONOSPACED, Font.PLAIN, 20);
 	
 	public PlayersSelectScreen() {
-		backgroundPanel = new JLabel(backgroundImg);
+		backgroundPanel = new JLabel(new ImageIcon("pselectbackground.png"));
 		backgroundPanel.setOpaque(true);
 		backgroundPanel.setBounds(0,0,800,600);
 		add(backgroundPanel, new Integer(0));
 		initNamePanels();
 		buttonPanel.setOpaque(false);
 		buttonPanel.setBounds(600,50,160,90);
-		buttonPanel.add(new OkButton(okButtonImg));
+		buttonPanel.add(new OkButton());
 		add(buttonPanel, new Integer(2));
 	}
 	
@@ -52,6 +51,7 @@ public class PlayersSelectScreen extends JLayeredPane{
 			//nameBoxes[i].setOpaque(false); // for invisible text boxes
 			nameBoxes[i].setBackground(Color.black);
 			nameBoxes[i].setForeground(Color.yellow);
+			nameBoxes[i].setFont(font);
 		}
 		
 		playerNamePanels[0].setBounds(0, 200, 400, 150);
@@ -104,8 +104,8 @@ public class PlayersSelectScreen extends JLayeredPane{
 	 * telling program to advance to next screen
 	 */
 	private class OkButton extends JLabel{
-		public OkButton(ImageIcon img) {
-			super(img);
+		public OkButton() {
+			super(new ImageIcon("okButton.png"));
 			addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
 					System.out.println("OK clicked");
