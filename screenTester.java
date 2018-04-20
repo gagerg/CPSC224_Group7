@@ -5,8 +5,10 @@
  * V1.2 - edited 4/18 added player select screen
  * 		- edited 4/19 added ok from  ^ button to continue to first turn
  * 		- edited 4/19 added RollScreen
+ * 		- edited 4/20 added commented out function to shuffle Player array
  */
 import java.util.*;
+import java.util.List;
 import java.awt.*;
 import javax.swing.*;
 
@@ -61,6 +63,7 @@ public class screenTester{
 		frame.add(roll);
 		frame.setVisible(true);
 	}
+	
 	/*
 	 * This function won't be in the actual game.java file, just used for outputting test messages between
 	 * events.
@@ -75,5 +78,15 @@ public class screenTester{
 		}
 		else return false;
 	}
+	
+	/*
+	 * This function takes in an reference to an array of Player objects and shuffles it randomly to determine turn order.
+	 */
+	/*public static void shufflePlayers(Player[] pArray) {
+		List<Player> p = Arrays.asList(pArray);
+		Collections.shuffle(p);
+		pArray = p.toArray(new Float[Player.length]);
+	}*/
+	
 	
 }
