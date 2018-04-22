@@ -3,24 +3,26 @@
  * overall resources and resources gained on a planet. It
  * also maintains the modifiers for each planet.
  * Journey to Pluto
- * @authors Alexa Andrews, Gage Gutmann, Andrew Brodhead 
+ * @authors Alexa Andrews, Gate Gutmann, Andrew Brodhead 
  * Date Created: April 14 2018
  * Last Modified: April 14 2018
 */
 
 public class Resources {
 	private final static int [][] MULTIPLIERS = {
-							{2, 5, 5, 4, 2}, // multipliers for earth
-							{3, 3, 1, 3, 3}, // multipliers for Mars
-							{2, 7, 2, 7, 4}, // multipliers or Jupiter
-							{5, 7, 5, 4, 6}, // multipliers for Saturn
-							{9, 6, 7, 2, 7}, // multipliers for Uranus
-							{5, 2, 3, 6, 2}, // multipliers for Neptune
-							};
+										{2, 5, 5, 4, 2}, // multipliers for earth
+										{3, 3, 1, 3, 3}, // multipliers for Mars
+										{2, 7, 2, 7, 4}, // multipliers or Jupiter
+										{5, 7, 5, 4, 6}, // multipliers for Saturn
+										{9, 6, 7, 2, 7}, // multipliers for Uranus
+										{5, 2, 3, 6, 2}, // multipliers for Neptune
+										{0, 0, 0, 0, 0} // no multipliers for Pluto
+									};
 	private int [] resources; 
 	private int [] onPlanetResources;
-     
-    /*
+
+	
+	/*
     * Resources initializes its resource arrays to size 5 for 5 resources
     * @parameters none
 	* @returns nothing 
@@ -31,39 +33,20 @@ public class Resources {
 		onPlanetResources = new int [5];
 	}
 	
-    /* This method takes in a score and current planet to display what resources
-     * are available in which amounts
+    /* This method takes in a current planet and returns the resource modifiers
+     * for that planet, taking into account any bonus the player has accrued  
     * @parameters an integer representing the current planet
-    * 			  an integer representing the score from rolling the dice
-    * @returns nothing
+    * @returns an int array representing the total multipliers for each resource
     * @throw - no exceptions are thrown by this function 
 	*/
-	public void displayPossibleResources(int score, int planet) {
+	public int [] getMultipliers(int planet) {
 		int bonus;
-		int totalMultiplier; // screen output  
-		int totalOfResource; // screen output 
+		int [] totalMultipliers = new int [5];
 		for (int resourceType = 0; resourceType < 5; resourceType++) { // 
 			bonus = (int)Math.floor(onPlanetResources[resourceType] / (MULTIPLIERS[planet][resourceType] * 10)); // bonus is determined by planet's multiplier 
-			totalMultiplier = bonus + MULTIPLIERS[planet][resourceType];							  // +1x for every 10x(Planet Multiplier) 
-			totalOfResource = (MULTIPLIERS[planet][resourceType] + bonus)* score;
-			switch(resourceType) { // change this to reflect the appropriate output to the GUI 
-				case 0: 
-					System.out.println("Parts: " + score + " x " + totalMultiplier + " = " + totalOfResource);
-					break;
-				case 1: 
-					System.out.println("Fuel: " + score + " x " + totalMultiplier + " = " + totalOfResource);
-					break;
-				case 2: 
-					System.out.println("Money: " + score + " x " + totalMultiplier + " = " + totalOfResource);
-					break;
-				case 3: 
-					System.out.println("Necessities: " + score + " x " + totalMultiplier + " = " + totalOfResource);
-					break;
-				case 4: 
-					System.out.println("Titanium: " + score + " x " + totalMultiplier + " = " + totalOfResource);
-					break;
-			}
+			totalMultipliers[resourceType] = bonus + MULTIPLIERS[planet][resourceType];							  // +1x for every 10x(Planet Multiplier) 
 		}
+		return totalMultipliers;
 	}
 	
     /* This method adds collected resources to the player's storage
@@ -94,14 +77,16 @@ public class Resources {
 		return allowTravel;
 	}
 	
-	/* This method checks to ensure a player has enough resources to travel the deducts
-	 * those resources from the player's total. It also zeroes out the on-planet resources
-	 * since the player is changing planets 
+	/* This method deducts those resources required for travel
+	 * from the player's total. It also zeroes out the on-planet resources
+	 * It should already have been determined that the user has enough resources
+	 * for travel before calling this method 
+	 * since the player is changing planets.
 	 * @parameters an integer array representing the necessary resources for travel
 	 * @returns nothing
 	 * @throw - InsufficientResourcesException if the player doesnt have enough resources to travel
 	 */
-	public void useResourcesForTravel(int [] usedResources) {
+	public void useResourcesForTravel(int [] usedResources) { 
 		for (int i = 0; i < 5; i++) {
 			resources[i] -= usedResources[i];
 			onPlanetResources[i] = 0; // travel is occurring; zero out onPlanetResources 
