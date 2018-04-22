@@ -23,7 +23,7 @@ public class Player {
     private Dice [] dice; 
     private Resources resources;
     private Travel travels;
-    private int location = 0;  // which planet the player is on. 0 is earth, 1 is Mars ... 6 is Pluto
+    private int location = 0;  // which planet the player is on. 0 is earth, 1 is Mars ... 6 is Pluto. -1 is dead 
     private int currentScore; // holds dice roll. reset each turn 
  
     private static final int NUM_TURNS = 3;
@@ -188,11 +188,31 @@ public class Player {
     	boolean isSuccessful = travels.attemptTravel(successRate);
     		if (isSuccessful) {
     			resources.useResourcesForTravel(travels.getTravelRequirements(location, destination));
+    			location = destination; 
+    		} else {
+    			location = -1; 
     		}
     	return isSuccessful;
     }
 
+    /*
+     * This method returns the player's name
+     * @parameters none
+     * @returns String representing the player's name
+     * @throw - no exceptions are thrown by this function 
+     */
 	public String getName() {
 		return name;
+	}
+	
+    /*
+     * This method returns the player's location
+     * -1 is dead, 0 is Earth... 6 is Pluto 
+     * @parameters none
+     * @returns int representing the player's planet
+     * @throw - no exceptions are thrown by this function 
+     */
+	public int getLocation() {
+		return location;
 	}
 }
