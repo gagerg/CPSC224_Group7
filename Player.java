@@ -14,15 +14,22 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
+
+
+
 public class Player {
-	// private String name; // will be used later for the full game
+	private String name;
 	private Scores score; 
     private Dice [] dice; 
-    private int location = 0;  // which planet the player is on. 0 is earth, 1 is Mars ... 6 is Pluto
-    private static final int NUM_TURNS = 3;
-    private int currentScore; // holds dice roll. reset each turn 
     private Resources resources;
-    private Travel travels; 
+    private Travel travels;
+    private int location = 0;  // which planet the player is on. 0 is earth, 1 is Mars ... 6 is Pluto
+    private int currentScore; // holds dice roll. reset each turn 
+ 
+    private static final int NUM_TURNS = 3;
+    private static final int NUM_DICE = 6;
+    private static final int NUM_SIDES = 8;
+    
     
 	/*
     * This is the constructor, it takes two parameter numSides and numDice
@@ -31,13 +38,14 @@ public class Player {
  	* @returns nothing 
  	* @throw - no exceptions are thrown by this function 
  	*/
-    public Player(int numDice, int numSides) { // String name) { 
+    public Player(String aName) { 
     	score = new Scores(); // initialize the Scores
     	resources = new Resources();
     	travels = new Travel(); 
-    	dice = new Dice [numDice];
-    	for (int i = 0; i < numDice; i++) {
-    		dice[i] = new Dice(numSides); // initialize all dice
+    	name = aName;
+    	dice = new Dice [NUM_DICE];
+    	for (int i = 0; i < NUM_DICE; i++) {
+    		dice[i] = new Dice(NUM_SIDES); // initialize all dice
     	}
     }
     
@@ -58,35 +66,6 @@ public class Player {
                 dice[i].roll();
         }
     }
-    
-    /* 
-    * This function allows a user a turn of
-    * three rolls to determine their score
-    * @parameters none
-    * @returns nothing
-    * @throw - no exceptions are thrown by this function
-    */
-    public void takeTurn(Scanner in) {
-    	int currentTurn = 1;
-    	boolean [] keep = new boolean[dice.length]; // keep string as long as amount of dice
-    	boolean [] toKeepAll = new boolean[dice.length];
-    	for (int i = 0; i < dice.length; i++) {
-    		keep[i] = false;
-    		toKeepAll[i] = true;
-    	}
-    	
-
-    	
-    	while (currentTurn < (NUM_TURNS + 1) && !(Arrays.equals(keep, toKeepAll))) { // if we are not out of turns
-    		rollDice(keep);							 							// and the user is not keeping all Dice
-    		if (currentTurn < NUM_TURNS) { // if there are turns remaining
-    			System.out.print("Enter the dice to keep (y or n) ");
-    			keep = in.nextLine(); // convert to take user input through GUI 
-    		}	
-    		currentTurn++; // rolling the Dice uses a turn
-    	}
-    	getScore(); // save the score at the end
-    }
    
     
     // all dice must be rolled before this method is called
@@ -102,20 +81,44 @@ public class Player {
         currentScore = score.scoreDice(dice);    
     }  	
     
+    
     /* 
-    * This function carries out the necessary operations for collecting resources
-    * It first displays the resources and their amounts possible to the user
-    * It then allows the user to select which resource they want
-    * It then adds the appropriate amount of that resource to the player's stock
-    * @parameters none
+    * This function returns the multipliers for each resource
+    * so the GUI can display them 
+    * @parameters none 
+    * @returns int [] containing the multipliers for each resource
+    * @throw - no exceptions are thrown by this function
+    */
+    public int [] getMultipliers() {
+    	return resources.getMultipliers(location); // shows all possibilities for resources
+    }
+    
+    /* 
+    * This function aids in collection. It calculates the total
+    * of each resource a player can attain based on their score and
+    * the multipliers for that planet including any player bonus
+    * This function returns the total for each resource
+    * so the GUI can display them 
+    * @parameters none 
+    * @returns int [] containing the total possible for each resource
+    * @throw - no exceptions are thrown by this function
+    */
+    public int [] getPossibleResources() {
+    	int [] multipliers = resources.getMultipliers(location); // shows all possibilities for resources
+    	int [] totalResources = new int [5];
+    	for (int resourceType = 0; resourceType < 5; resourceType++) {
+    		totalResources[resourceType] = multipliers[resourceType] * currentScore;  
+    	}
+    	return totalResources;
+    }
+    
+    /* 
+    * This function adds resources of a given type to a player's stores 
+    * @parameters int resourceType the user wishes to collect 
     * @returns nothing
     * @throw - no exceptions are thrown by this function
     */
-    public void collectResources() {
-    	resources.displayPossibleResources(currentScore, location); // shows all possibilities for resources
-    	
-    	int resourceType = 5; // take user input for what resource to get from the GUI in place of this line
-    	
+    public void collectResources(int resourceType) {
     	resources.addResource(resourceType, currentScore, location);
     }
     
@@ -138,9 +141,6 @@ public class Player {
     * The player only gets option to travel if they can at least travel to the next planet 
     * Further planets are calculated based on the total of the player's resources
     * The availability is determined by the amount of resources the user possesses 
-    * This could be modified to work with the GUI to only allow players to travel to planets
-    * which they have enough resources for but for now returns an array so another method
-    * could do that. we will decide which route is best 
     * @parameters none
     * @returns boolean array with indices corresponding to planets including either which is always false
     * each array slot is false if the player has insufficient resources to travel to that planet, true otherwise
@@ -165,32 +165,34 @@ public class Player {
     
     
     /* 
-    * This function allows the player to travel. It will need to take user input for the destination 
-    * or have that changed to a parameter and get it elsewhere. 
-    * It will calculate the success rate, and needs to display it to the user then take input
-    * as to whether or not the user would like to proceed with travel. If this is not possible this 
-    * method may need to be broken up so this part can be done elsewhere. 
+    * This function in used prior to travel. It will take the destination as a parameter. 
+    * It will calculate the success rate so the user can determine if they wish to travel
+    * @parameters an int destination planet
+    * @returns double representing the chance of success 
+    * @throw - no exceptions are thrown by this function
+    */
+    public double tryTravel(int destination) {
+    	return travels.calculateSuccessRate(location, destination, currentScore);
+    }	
+    
+    
+    /*
     * If the user wishes to travel, their success rate will be used with a random number generator
-    * to see if they make it. If they do, the appropriate resources will be taken from their stores. 
-    * This could be modified to work with the GUI to show the success or failure of the travel
-    * This returns a boolean so that the GUI work on the result can be done elsewhere if desired
-    * @parameters none
+    * to see if they make it. If they do, the appropriate resources will be taken from their stores.
+    * This returns a boolean true if travel is successful, false otherwise
+    * @parameters double representing the success rate, and an int representing destination planet
     * @returns boolean true if travel is successful, false otherwise 
     * @throw - no exceptions are thrown by this function
     */
-    public boolean commenceTravel() {
-    	int destination = 6; // take in user input via GUI here for destination planet 
-    	double successRate = travels.calculateSuccessRate(location, destination, currentScore);
-    	boolean isSuccessful; 
-    	System.out.println("Your success rate is " + successRate + ". Would you like to travel?");
-    	// take user input via GUI as to whether user still wishes to travel
-    	if (true) { // if user wishes to travel
-    		isSuccessful = travels.attemptTravel(successRate);
+    public boolean commenceTravel(double successRate, int destination) {
+    	boolean isSuccessful = travels.attemptTravel(successRate);
     		if (isSuccessful) {
     			resources.useResourcesForTravel(travels.getTravelRequirements(location, destination));
-    			// this method could use the GUI here to display a success message if desired
-    		} // else {} this method could use the GUI to display a failure and death message 
-    	}
+    		}
     	return isSuccessful;
     }
+
+	public String getName() {
+		return name;
+	}
 }
