@@ -54,10 +54,10 @@ public class Player {
     * It rolls based on the array keep such that the corresponding indexed 
     * Dice is rolled if keep is 0 at that index 
     * @parameters boolean array keep to determine which Dice are not rolled
-    * @returns nothing
+    * @returns the newly rerolled Dice array 
     * @throw - no exceptions are thrown by this function
     */
-    public void rollDice(boolean[] keep) { // 1 = keep, 0 = roll 
+    public Dice[] rollDice(boolean[] keep) { // 1 = keep, 0 = roll 
     	
     	// checks index again keep, those lining
     	// up with a 1 are preserved
@@ -65,6 +65,7 @@ public class Player {
             if (!keep[i]) // if we don't keep it we roll it 
                 dice[i].roll();
         }
+	return dice;
     }
    
     
@@ -73,15 +74,17 @@ public class Player {
     * This function first sorts the Dice then scores them using its Scores.
     * It saves the highest score in currentScore 
     * @parameters none
-    * @returns nothing
+    * @returns the highest Score 
     * @throw - no exceptions are thrown by this function
     */
-    public void getScore() { 
+    public int getScore() { 
     	Arrays.sort(dice); // must sort for scoreDice to work properly
         currentScore = score.scoreDice(dice);    
+	return currentScore;
     }  	
     
     
+	
     /* 
     * This function returns the multipliers for each resource
     * so the GUI can display them 
