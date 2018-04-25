@@ -68,6 +68,20 @@ public class Player {
 	return dice;
     }
    
+    /* 
+    * This function simulates the rolling of the dice in the hand
+    * It rolls all dice when no parameters are provided 
+    * @parameters none
+    * @returns the newly rerolled Dice array 
+    * @throw - no exceptions are thrown by this function
+    */
+    public Dice[] rollDice() { // 1 = keep, 0 = roll 
+    	for (int i = 0; i < dice.length; i++) {
+                dice[i].roll();
+        }
+	return dice;
+    }	
+	
     
     // all dice must be rolled before this method is called
     /* 
