@@ -1,5 +1,5 @@
 /**
- * Screentester.java
+ * Screentester.java - JUST A TEST, not final main program
  * runs a test to simulate game flow from one screen to the next
  * By Andrew Brodhead
  * V1.2 - edited 4/18 added player select screen
@@ -92,12 +92,17 @@ public class screenTester{
 					c++;
 				}
 				boolean gatherChosen = choice.didUserGather();
+				frame.remove(choice);
 				if(gatherChosen) {
 					System.out.println("user gathered");
+					ResourcesSelectScreen gather = new ResourcesSelectScreen(p);
+					frame.add(gather);
+					frame.setVisible(true);
+					while(true) {}
 				} else {
 					System.out.println("user travelled");
 				}
-				frame.remove(choice);
+				
 				
 			}
 		}

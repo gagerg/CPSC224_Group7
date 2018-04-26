@@ -17,7 +17,7 @@ public class ResourcesSelectScreen extends JLayeredPane{
 	private boolean resourceSelected;
 	private int resource; 
 	
-	public RollScreen(Player currentPlayer) {
+	public ResourcesSelectScreen(Player currentPlayer) {
 		this.currentPlayer = currentPlayer;
 		this.score = currentPlayer.getScore();
 		this.multipliers = currentPlayer.getMultipliers(); 
@@ -30,9 +30,10 @@ public class ResourcesSelectScreen extends JLayeredPane{
 		initPlayerResourceButtons();
 		
 		buttonPanel.setOpaque(false);
-		buttonPanel.setBounds(600,50,160,90);
+		buttonPanel.setBounds(200,0,400,600);
 		add(buttonPanel, new Integer(2));
-		
+		PlayerChartButton viewPlayers = new PlayerChartButton();
+		add(viewPlayers, new Integer(1));
 	}
 
 		/**
@@ -75,10 +76,14 @@ public class ResourcesSelectScreen extends JLayeredPane{
 		playerResourceButtons[2].addActionListener(partsAction);
 		playerResourceButtons[3].addActionListener(partsAction);
 		playerResourceButtons[4].addActionListener(partsAction);
-		
+	
+		buttonPanel.add(scoreDisplay);
+		//add an empty panel 
 		for (int i = 0; i < 5; i++) {
+			playerResourceButtons[i].setFont(font);
 			buttonPanel.add(playerResourceButtons[i]);
 		}
+		
 	}
 	private class ResourceAction implements ActionListener {
 		private int aResource; 
