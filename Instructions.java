@@ -73,7 +73,7 @@ public class Instructions extends javax.swing.JPanel {
         jTextArea4.setColumns(20);
         jTextArea4.setForeground(new java.awt.Color(255, 255, 102));
         jTextArea4.setRows(5);
-        jTextArea4.setText("â€¢ Decide whether to stay on planet and collect resources or \n  travel to another planet\nâ€¢ When collecting resources, roll the die three times to get\n  the highest possible combo \nâ€¢ There are 5 resources: parts, fuel, money, titanium, and \n  necessities such as food, water, and clothes \nâ€¢ After getting your score, choose which resource to collect\nâ€¢ If moving to another planet, roll to see the probability of \n  making it to another planet then choose whether you wish to travel\n");
+        jTextArea4.setText("• Decide whether to stay on planet and collect resources or \n  travel to another planet\n• When collecting resources, roll the die three times to get\n  the highest possible combo \n• There are 5 resources: parts, fuel, money, titanium, and \n  necessities such as food, water, and clothes \n• After getting your score, choose which resource to collect\n• If moving to another planet, roll to see the probability of \n  making it to another planet then choose whether you wish to travel\n");
         jTextArea4.setBorder(null);
         jScrollPane6.setViewportView(jTextArea4);
 
@@ -107,7 +107,7 @@ public class Instructions extends javax.swing.JPanel {
         jTextArea1.setColumns(20);
         jTextArea1.setForeground(new java.awt.Color(255, 255, 102));
         jTextArea1.setRows(5);
-        jTextArea1.setText("â€¢ For your first roll, roll all 5 dice\nâ€¢ If you get the exact combo you want, stop rolling\nâ€¢ Otherwise select the dice you want to keep continue onto your second roll\nâ€¢ For your second roll, roll the \nnon-selected dice\nâ€¢ If you get the exact combo you want, stop rolling\nâ€¢ Otherwise select the dice you want to keep continue onto your third roll\nâ€¢ Your final roll, choose which to keep and which to roll again. The dice afterwards are final.\n");
+        jTextArea1.setText("• For your first roll, roll all 5 dice\n• If you get the exact combo you want, stop rolling\n• Otherwise select the dice you want to keep continue onto your second roll\n• For your second roll, roll the \nnon-selected dice\n• If you get the exact combo you want, stop rolling\n• Otherwise select the dice you want to keep continue onto your third roll\n• Your final roll, choose which to keep and which to roll again. The dice afterwards are final.\n");
         jScrollPane3.setViewportView(jTextArea1);
 
         jTextArea2.setEditable(false);

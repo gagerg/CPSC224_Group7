@@ -6,6 +6,7 @@
  * 		- edited 4/19 added ok from  ^ button to continue to first turn
  * 		- edited 4/19 added RollScreen
  * 		- edited 4/20 added commented out function to shuffle Player array
+ * 		- edited 4/25 finished rollscreen, added game loop and per-player loop
  */
 import java.util.*;
 import java.util.List;
@@ -58,40 +59,46 @@ public class screenTester{
 			players[i] = new Player(playerNames[i]);
 		}
 		shufflePlayers(players);
-		//At this point game should construct an array of Player objects, initialize them with
-		//player names, and determine turn order(somehow). If we decide to do roll for turn order, those
-		//buttons will be in pselect name. Otherwise, it might just randomly decide by randomly sorting the
-		//player array.
 		System.out.println("removing pselect");
 		frame.remove(pselect);
 		while(!gameOver) {
-			//test player, creates a rollScreen with playername Gregor on planet 3(Saturn)
 			for(int j = 0; j < players.length; j++) {
-				Player p1 = players[j];
-				Dice[] intialRoll = p1.rollDice();
-				RollScreen roll = new RollScreen(p1, intialRoll);
+				Player p = players[j];
+				Dice[] intialRoll = p.rollDice();
+				RollScreen roll = new RollScreen(p, intialRoll);
 				frame.add(roll);
 				frame.setVisible(true);
-				System.out.print("waiting for user to Reroll");
-				while(!roll.isRerollClicked()) {
-					if(tick(c)) System.out.print(".");
-					c++;
-				}
-				System.out.println(Arrays.toString(roll.getDiceToReroll()));
-				roll.setRoll(p1.rollDice(roll.getDiceToReroll()));
-				System.out.print("waiting for user to Reroll");
-				while(!roll.isRerollClicked()) {
-					if(tick(c)) System.out.print(".");
-					c++;
+				//reroll two times
+				for(int k = 0; k < 2; k++) {
+					System.out.print("waiting for user to Reroll");
+					while(!roll.isRerollClicked()) {
+						if(tick(c)) System.out.print(".");
+						c++;
+					}
+					roll.setRoll(p.rollDice(roll.getDiceToReroll()));
 				}
 				
-				roll.setRoll(p1.rollDice(roll.getDiceToReroll()));
 				System.out.println("waiting for user to click okay");
 				while(!roll.isOkClicked()) {
 					if(tick(c)) System.out.print(".");
 					c++;
 				}
 				frame.remove(roll);
+				GatherOrTravelScreen choice = new GatherOrTravelScreen(p);
+				frame.add(choice);
+				frame.setVisible(true);
+				while(!choice.isButtonClicked()) {
+					if(tick(c)) System.out.print(".");
+					c++;
+				}
+				boolean gatherChosen = choice.didUserGather();
+				if(gatherChosen) {
+					System.out.println("user gathered");
+				} else {
+					System.out.println("user travelled");
+				}
+				frame.remove(choice);
+				
 			}
 		}
 	}

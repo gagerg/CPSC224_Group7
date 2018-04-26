@@ -4,12 +4,10 @@
  * this screen gives the user the option to reroll up to two times, displays turns remaining and
  * allows user to finish if they decide not to reroll
  * by Andrew Brodhead
- * V 1.1 - edited 4/20, added dice icons to panel and started keep dice selection
+ * V 1.2 - edited 4/20, added dice icons to panel and started keep dice selection
+ * 		 - edited 4/25, added roll remaining counter, refreshing buttons/finished
  * 
  * 
- * to do: pretty much everything
- * from player/turn/something class: need something[] getRoll(), String getName(), int getPlanet(),
- * from scorecard class: need getScore(something[] roll), but only if the score is calculated from this class
  */
 import java.util.*;
 import java.awt.*;
@@ -56,6 +54,8 @@ public class RollScreen extends JLayeredPane{
 		backgroundPanel = new JLabel(new ImageIcon("backgroundPlanet" + p.getLocation() + ".png"));
 		backgroundPanel.setOpaque(true);
 		backgroundPanel.setBounds(0,0,800,600);
+		PlayerChartButton viewPlayers = new PlayerChartButton();
+		add(viewPlayers, new Integer(1));
 		add(backgroundPanel, new Integer(0));
 		add(dpanel, new Integer(1));
 		add(pName, new Integer(1));
