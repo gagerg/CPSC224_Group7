@@ -232,4 +232,34 @@ public class Player {
 	public int getLocation() {
 		return location;
 	}
+	
+    /*
+     * This method returns the player's location as a string
+     * -1 is dead, 0 is Earth... 6 is Pluto 
+     * @parameters none
+     * @returns String representing the player's planet
+     * @throw - no exceptions are thrown by this function 
+     */
+	public String getPlanet() {
+		String planetName;
+		switch (location) {
+			case 0: planetName = "Earth";
+					break;
+			case 1: planetName = "Mars";
+					break;
+			case 2: planetName = "Jupiter";
+					break;
+			case 3: planetName = "Saturn";
+					break;
+			case 4: planetName = "Uranus";
+					break;
+			case 5: planetName = "Neptune";
+					break;
+			case 6: planetName = "Pluto";
+					break;
+			default: planetName = "Dead";
+					break; 
+		}
+		return planetName;
+	}
 }
