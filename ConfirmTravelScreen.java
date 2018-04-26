@@ -37,6 +37,7 @@ public class ConfirmTravelScreen extends JLayeredPane{
 		buttonPanel.setOpaque(false);
 		buttonPanel.setBounds(600,50,160,90);
 		buttonPanel.add(new OkButton());
+		buttonPanel.add(new RemainButton());
 		add(buttonPanel, new Integer(2));
 	}
 	
