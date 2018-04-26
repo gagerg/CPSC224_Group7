@@ -23,6 +23,7 @@ public class ConfirmTravelScreen extends JLayeredPane{
 	private Font font = new Font(Font.MONOSPACED, Font.PLAIN, 20);
 	private int destination; 
 	private Player currentPlayer;
+	private boolean travelSuccess; 
 	
 	public ConfirmTravelScreen(Player currentPlayer, int destination) {
 		this.currentPlayer = currentPlayer;
@@ -89,10 +90,17 @@ public class ConfirmTravelScreen extends JLayeredPane{
 			addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
 					System.out.println("OK clicked");
+					travelSuccess = currentPlayer.commenceTravel(currentPlayer.tryTravel(destination), destination);
 					okClicked = true;
 				}
 			});
 		}
+	}
+	
+	
+	// returns whether travel is successful. should only be used if ok is clicked 
+	public boolean isTravelSuccessful() {
+		return travelSuccess; 
 	}
 	
 	/*
