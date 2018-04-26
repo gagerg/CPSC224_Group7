@@ -55,7 +55,7 @@ public class Instructions extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.setBackground(new java.awt.Color(0, 0, 51));
+        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 102));
         jTabbedPane1.setForeground(new java.awt.Color(0, 0, 51));
 
         jPanel3.setBackground(new java.awt.Color(0, 0, 51));
@@ -268,4 +268,3 @@ public class Instructions extends javax.swing.JPanel {
     private javax.swing.JTextArea jTextArea4;
     // End of variables declaration                   
 }
-
