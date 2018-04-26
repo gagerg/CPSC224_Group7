@@ -7,6 +7,7 @@ public class ResourcesSelectScreen extends JLayeredPane{
 
 	private JLabel backgroundPanel;
 	private JPanel buttonPanel = new JPanel();
+	private JPanel emptyPanel = new JPanel(); 
 	private Font font = new Font(Font.MONOSPACED, Font.PLAIN, 20);
 	private JButton [] playerResourceButtons;
 	private JTextField scoreDisplay;
@@ -72,13 +73,13 @@ public class ResourcesSelectScreen extends JLayeredPane{
 		ResourceAction titaniumAction = new ResourceAction(4);
 		
 		playerResourceButtons[0].addActionListener(partsAction);
-		playerResourceButtons[1].addActionListener(partsAction);
-		playerResourceButtons[2].addActionListener(partsAction);
-		playerResourceButtons[3].addActionListener(partsAction);
-		playerResourceButtons[4].addActionListener(partsAction);
+		playerResourceButtons[1].addActionListener(fuelAction);
+		playerResourceButtons[2].addActionListener(moneyAction);
+		playerResourceButtons[3].addActionListener(necessitiesAction);
+		playerResourceButtons[4].addActionListener(titaniumAction);
 	
 		buttonPanel.add(scoreDisplay);
-		//add an empty panel 
+		buttonPanel.add(emptyPanel); //add an empty panel 
 		for (int i = 0; i < 5; i++) {
 			playerResourceButtons[i].setFont(font);
 			buttonPanel.add(playerResourceButtons[i]);
