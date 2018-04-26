@@ -262,4 +262,34 @@ public class Player {
 		}
 		return planetName;
 	}
+	
+    /*
+     * This method returns the given int as a string
+     * -1 is dead, 0 is Earth... 6 is Pluto 
+     * @parameters int planet
+     * @returns String representing the planet
+     * @throw - no exceptions are thrown by this function 
+     */
+	public String getPlanet(int planet) {
+		String planetName;
+		switch (planet) {
+			case 0: planetName = "Earth";
+					break;
+			case 1: planetName = "Mars";
+					break;
+			case 2: planetName = "Jupiter";
+					break;
+			case 3: planetName = "Saturn";
+					break;
+			case 4: planetName = "Uranus";
+					break;
+			case 5: planetName = "Neptune";
+					break;
+			case 6: planetName = "Pluto";
+					break;
+			default: planetName = "Dead";
+					break; 
+		}
+		return planetName;
+	}
 }
