@@ -43,6 +43,7 @@ public class Player {
     	resources = new Resources();
     	travels = new Travel(); 
     	name = aName;
+    	currentScore = -1; 
     	dice = new Dice [NUM_DICE];
     	for (int i = 0; i < NUM_DICE; i++) {
     		dice[i] = new Dice(NUM_SIDES); // initialize all dice
@@ -92,13 +93,15 @@ public class Player {
     * @throw - no exceptions are thrown by this function
     */
     public int getScore() { 
-    	Arrays.sort(dice); // must sort for scoreDice to work properly
-        currentScore = score.scoreDice(dice);    
-	return currentScore;
+    	if (currentScore == -1) calculateScore(); // if we haven't scored the dice yet, score them now
+        return currentScore;
     }  	
     
+    private void calculateScore() {
+    	Arrays.sort(dice); // must sort for scoreDice to work properly
+        currentScore = score.scoreDice(dice);  
+    }
     
-	
     /* 
     * This function returns the multipliers for each resource
     * so the GUI can display them 
@@ -206,6 +209,7 @@ public class Player {
     		if (isSuccessful) {
     			resources.useResourcesForTravel(travels.getTravelRequirements(location, destination));
     			location = destination; 
+    			currentScore = -1; // reset currentScore 
     		} else {
     			location = -1; 
     		}
