@@ -15,6 +15,9 @@ import javax.swing.*;
 public class screenTester{
 	private static int numberPlayers; 
 	private static String[] playerNames;
+	private static boolean gameOver = false;
+	private static Player[] players;
+	
 	public static void main(String[] args) {
 		//set up frame
 		JFrame frame = new JFrame("Race to Pluto!");
@@ -50,18 +53,47 @@ public class screenTester{
 		//number of players has been entered, proceed to first player turn
 		playerNames = pselect.getNames();
 		numberPlayers = pselect.getNumberPlayers();
-		
+		players = new Player[numberPlayers];
+		for(int i = 0; i < numberPlayers; i++) {
+			players[i] = new Player(playerNames[i]);
+		}
+		shufflePlayers(players);
 		//At this point game should construct an array of Player objects, initialize them with
 		//player names, and determine turn order(somehow). If we decide to do roll for turn order, those
 		//buttons will be in pselect name. Otherwise, it might just randomly decide by randomly sorting the
 		//player array.
 		System.out.println("removing pselect");
 		frame.remove(pselect);
-		
-		//test player, creates a rollScreen with playername Gregor on planet 3(Saturn)
-		RollScreen roll = new RollScreen("Gregor", 3);
-		frame.add(roll);
-		frame.setVisible(true);
+		while(!gameOver) {
+			//test player, creates a rollScreen with playername Gregor on planet 3(Saturn)
+			for(int j = 0; j < players.length; j++) {
+				Player p1 = players[j];
+				Dice[] intialRoll = p1.rollDice();
+				RollScreen roll = new RollScreen(p1, intialRoll);
+				frame.add(roll);
+				frame.setVisible(true);
+				System.out.print("waiting for user to Reroll");
+				while(!roll.isRerollClicked()) {
+					if(tick(c)) System.out.print(".");
+					c++;
+				}
+				System.out.println(Arrays.toString(roll.getDiceToReroll()));
+				roll.setRoll(p1.rollDice(roll.getDiceToReroll()));
+				System.out.print("waiting for user to Reroll");
+				while(!roll.isRerollClicked()) {
+					if(tick(c)) System.out.print(".");
+					c++;
+				}
+				
+				roll.setRoll(p1.rollDice(roll.getDiceToReroll()));
+				System.out.println("waiting for user to click okay");
+				while(!roll.isOkClicked()) {
+					if(tick(c)) System.out.print(".");
+					c++;
+				}
+				frame.remove(roll);
+			}
+		}
 	}
 	
 	/*
@@ -82,11 +114,11 @@ public class screenTester{
 	/*
 	 * This function takes in an reference to an array of Player objects and shuffles it randomly to determine turn order.
 	 */
-	/*public static void shufflePlayers(Player[] pArray) {
+	public static void shufflePlayers(Player[] pArray) {
 		List<Player> p = Arrays.asList(pArray);
 		Collections.shuffle(p);
-		pArray = p.toArray(new Float[Player.length]);
-	}*/
+		pArray = p.toArray(new Player[players.length]);
+	}
 	
 	
 }
