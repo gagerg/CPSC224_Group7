@@ -56,7 +56,7 @@ public class ResourcesSelectScreen extends JLayeredPane{
 		
 		playerResourceButtons[0] = new JButton("Parts: " + score + " X " + multipliers[0] + " = " + possibleResources[0]);
 		playerResourceButtons[1] = new JButton("Fuel: " + score + " X " + multipliers[1] + " = " + possibleResources[1]);
-		playerResourceButtons[2] = new JButton("Money: " + score + " X " + multipliers[2] + " = " + spossibleResources[2]);
+		playerResourceButtons[2] = new JButton("Money: " + score + " X " + multipliers[2] + " = " + possibleResources[2]);
 		playerResourceButtons[3] = new JButton("Necessities: " + score + " X " + multipliers[3] + " = " + possibleResources[3]);
 		playerResourceButtons[4] = new JButton("Titanium: " + score + " X " + multipliers[4] + " = " + possibleResources[4]);
 		
