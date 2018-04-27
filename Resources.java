@@ -92,4 +92,8 @@ public class Resources {
 			onPlanetResources[i] = 0; // travel is occurring; zero out onPlanetResources 
 		}	
 	}
+	
+	public int [] getCurrentResources () {
+		return resources;
+	}
 }
