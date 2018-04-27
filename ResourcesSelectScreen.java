@@ -78,6 +78,7 @@ public class ResourcesSelectScreen extends JLayeredPane{
 		playerResourceButtons[3].addActionListener(necessitiesAction);
 		playerResourceButtons[4].addActionListener(titaniumAction);
 	
+		emptyPanel.setBounds(0, 150, 400, 200);
 		buttonPanel.add(scoreDisplay);
 		buttonPanel.add(emptyPanel); //add an empty panel 
 		for (int i = 0; i < 5; i++) {
