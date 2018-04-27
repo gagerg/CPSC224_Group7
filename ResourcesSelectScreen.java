@@ -15,6 +15,7 @@ public class ResourcesSelectScreen extends JLayeredPane{
 	private Player currentPlayer;
 	private int score;
 	private int [] multipliers;
+	private int [] possibleResources;
 	private boolean resourceSelected;
 	private int resource; 
 	
@@ -22,7 +23,7 @@ public class ResourcesSelectScreen extends JLayeredPane{
 		this.currentPlayer = currentPlayer;
 		this.score = currentPlayer.getScore();
 		this.multipliers = currentPlayer.getMultipliers(); 
-		
+		this.possibleResources = currentPlayer.getPossibleResources();
 		
 		backgroundPanel = new JLabel(new ImageIcon("backgroundPlanet" + currentPlayer.getLocation() + ".png"));
 		backgroundPanel.setOpaque(true);
@@ -53,12 +54,11 @@ public class ResourcesSelectScreen extends JLayeredPane{
 		scoreDisplay.setEditable(false);
 		
 		
-		playerResourceButtons[0] = new JButton("Parts: " + score + " X " + multipliers[0] + " = " + score*multipliers[0]);
-		playerResourceButtons[1] = new JButton("Fuel: " + score + " X " + multipliers[1] + " = " + score*multipliers[1]);
-		playerResourceButtons[2] = new JButton("Money: " + score + " X " + multipliers[2] + " = " + score*multipliers[2]);
-		playerResourceButtons[3] = new JButton("Necessities: " + score + " X " + multipliers[3] + " = " + score*multipliers[3]);
-		playerResourceButtons[4] = new JButton("Titanium: " + score + " X " + multipliers[4] + " = " + score*multipliers[4]);
-		
+		playerResourceButtons[0] = new JButton("Parts: " + score + " X " + multipliers[0] + " = " + possibleResources[0]);
+		playerResourceButtons[1] = new JButton("Fuel: " + score + " X " + multipliers[1] + " = " + possibleResources[1]);
+		playerResourceButtons[2] = new JButton("Money: " + score + " X " + multipliers[2] + " = " + spossibleResources[2]);
+		playerResourceButtons[3] = new JButton("Necessities: " + score + " X " + multipliers[3] + " = " + possibleResources[3]);
+		playerResourceButtons[4] = new JButton("Titanium: " + score + " X " + multipliers[4] + " = " + possibleResources[4]);
 		
 		playerResourceButtons[0].setBounds(0, 150, 400, 200);
 		playerResourceButtons[1].setBounds(400, 150, 400, 200);
