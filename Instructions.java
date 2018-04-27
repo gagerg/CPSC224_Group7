@@ -6,12 +6,12 @@
 
 /**
  *
- * @author gager
+ * @author gagerg
  */
 public class Instructions extends javax.swing.JPanel {
 
     /**
-     * Creates new form Instructions2
+     * Creates new form Instructions
      */
     public Instructions() {
         initComponents();
@@ -56,12 +56,11 @@ public class Instructions extends javax.swing.JPanel {
         );
 
         jTabbedPane1.setBackground(new java.awt.Color(255, 255, 102));
-        jTabbedPane1.setForeground(new java.awt.Color(0, 0, 51));
 
-        jPanel3.setBackground(new java.awt.Color(0, 0, 51));
+        jPanel3.setBackground(new java.awt.Color(0, 0, 0));
 
         jTextArea3.setEditable(false);
-        jTextArea3.setBackground(new java.awt.Color(0, 0, 51));
+        jTextArea3.setBackground(new java.awt.Color(0, 0, 0));
         jTextArea3.setColumns(20);
         jTextArea3.setForeground(new java.awt.Color(255, 255, 102));
         jTextArea3.setRows(5);
@@ -69,11 +68,11 @@ public class Instructions extends javax.swing.JPanel {
         jTextArea3.setBorder(null);
         jScrollPane5.setViewportView(jTextArea3);
 
-        jTextArea4.setBackground(new java.awt.Color(0, 0, 51));
+        jTextArea4.setBackground(new java.awt.Color(0, 0, 0));
         jTextArea4.setColumns(20);
         jTextArea4.setForeground(new java.awt.Color(255, 255, 102));
         jTextArea4.setRows(5);
-        jTextArea4.setText("• Decide whether to stay on planet and collect resources or \n  travel to another planet\n• When collecting resources, roll the die three times to get\n  the highest possible combo \n• There are 5 resources: parts, fuel, money, titanium, and \n  necessities such as food, water, and clothes \n• After getting your score, choose which resource to collect\n• If moving to another planet, roll to see the probability of \n  making it to another planet then choose whether you wish to travel\n");
+        jTextArea4.setText("â€¢ Decide whether to stay on planet and collect resources or \n  travel to another planet\nâ€¢ When collecting resources, roll the die three times to get\n  the highest possible combo \nâ€¢ There are 5 resources: parts, fuel, money, titanium, and \n  necessities such as food, water, and clothes \nâ€¢ After getting your score, choose which resource to collect\nâ€¢ If moving to another planet, roll to see the probability of \n  making it to another planet then choose whether you wish to travel\n");
         jTextArea4.setBorder(null);
         jScrollPane6.setViewportView(jTextArea4);
 
@@ -100,18 +99,18 @@ public class Instructions extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("How to ", jPanel3);
 
-        jPanel4.setBackground(new java.awt.Color(0, 0, 51));
+        jPanel4.setBackground(new java.awt.Color(0, 0, 0));
 
         jTextArea1.setEditable(false);
-        jTextArea1.setBackground(new java.awt.Color(0, 0, 51));
+        jTextArea1.setBackground(new java.awt.Color(0, 0, 0));
         jTextArea1.setColumns(20);
         jTextArea1.setForeground(new java.awt.Color(255, 255, 102));
         jTextArea1.setRows(5);
-        jTextArea1.setText("• For your first roll, roll all 5 dice\n• If you get the exact combo you want, stop rolling\n• Otherwise select the dice you want to keep continue onto your second roll\n• For your second roll, roll the \nnon-selected dice\n• If you get the exact combo you want, stop rolling\n• Otherwise select the dice you want to keep continue onto your third roll\n• Your final roll, choose which to keep and which to roll again. The dice afterwards are final.\n");
+        jTextArea1.setText("â€¢ For your first roll, roll all 5 dice\nâ€¢ If you get the exact combo you want, stop rolling\nâ€¢ Otherwise select the dice you want to keep continue onto your second roll\nâ€¢ For your second roll, roll the \nnon-selected dice\nâ€¢ If you get the exact combo you want, stop rolling\nâ€¢ Otherwise select the dice you want to keep continue onto your third roll\nâ€¢ Your final roll, choose which to keep and which to roll again. The dice afterwards are final.\n");
         jScrollPane3.setViewportView(jTextArea1);
 
         jTextArea2.setEditable(false);
-        jTextArea2.setBackground(new java.awt.Color(0, 0, 51));
+        jTextArea2.setBackground(new java.awt.Color(0, 0, 0));
         jTextArea2.setColumns(20);
         jTextArea2.setForeground(new java.awt.Color(255, 255, 102));
         jTextArea2.setRows(5);
@@ -141,7 +140,7 @@ public class Instructions extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Scoring ", jPanel4);
 
-        jPanel2.setBackground(new java.awt.Color(51, 0, 51));
+        jPanel2.setBackground(new java.awt.Color(0, 0, 0));
 
         jTable1.setBackground(new java.awt.Color(0, 102, 102));
         jTable1.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
@@ -163,9 +162,16 @@ public class Instructions extends javax.swing.JPanel {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jTable1.setRowHeight(35);
@@ -177,6 +183,14 @@ public class Instructions extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
+            jTable1.getColumnModel().getColumn(3).setResizable(false);
+            jTable1.getColumnModel().getColumn(4).setResizable(false);
+            jTable1.getColumnModel().getColumn(5).setResizable(false);
+        }
 
         jTable2.setBackground(new java.awt.Color(0, 102, 102));
         jTable2.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
