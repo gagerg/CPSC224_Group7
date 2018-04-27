@@ -83,6 +83,11 @@ public class Player {
 	return dice;
     }	
 	
+	
+   public int [] getPlayerResources() {
+   	return resources.getCurrentResources();
+   }
+	
     
     // all dice must be rolled before this method is called
     /* 
