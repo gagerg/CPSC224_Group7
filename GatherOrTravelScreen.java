@@ -15,7 +15,7 @@ public class GatherOrTravelScreen extends JLayeredPane {
 	private boolean userGathers;
 	private Font font = new Font(Font.MONOSPACED, Font.PLAIN, 30);
 	
-	public GatherOrTravelScreen(Player p) {
+	public GatherOrTravelScreen(Player p, Player[] pArray) {
 		backgroundPanel = new JLabel(new ImageIcon("backgroundPlanet" + p.getLocation() + ".png"));
 		backgroundPanel.setOpaque(true);
 		backgroundPanel.setBounds(0,0,800,600);

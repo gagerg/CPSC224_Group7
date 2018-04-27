@@ -84,7 +84,7 @@ public class screenTester{
 					c++;
 				}
 				frame.remove(roll);
-				GatherOrTravelScreen choice = new GatherOrTravelScreen(p);
+				GatherOrTravelScreen choice = new GatherOrTravelScreen(p, players);
 				frame.add(choice);
 				frame.setVisible(true);
 				while(!choice.isButtonClicked()) {
@@ -93,14 +93,23 @@ public class screenTester{
 				}
 				boolean gatherChosen = choice.didUserGather();
 				frame.remove(choice);
-				if(gatherChosen) {
-					System.out.println("user gathered");
-					ResourcesSelectScreen gather = new ResourcesSelectScreen(p);
-					frame.add(gather);
-					frame.setVisible(true);
-					while(true) {}
-				} else {
-					System.out.println("user travelled");
+				boolean turnNotOver = true;
+				while(turnNotOver) {
+					if(gatherChosen) {
+						System.out.println("user gathered");
+						ResourcesSelectScreen gather = new ResourcesSelectScreen(p);
+						frame.add(gather);
+						frame.setVisible(true);
+						while(true) {}
+						//frame.remove(gather);
+					} else {
+						System.out.println("user travelled");
+						TravelScreen travel = new TravelScreen(p, players);
+						frame.add(travel);
+						frame.setVisible(true);
+						while(true) {}
+						//frame.remove(travel);
+					}
 				}
 				
 				
