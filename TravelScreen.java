@@ -6,9 +6,11 @@ import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.table.TableColumnModel;
 
 public class TravelScreen extends JLayeredPane {
 	private Font font = new Font(Font.MONOSPACED, Font.PLAIN, 30);
+	private Font font2 = new Font(Font.MONOSPACED, Font.PLAIN, 14);
 	private JLabel backgroundPanel;
 	private PlanetPanel pPanel;
 	private Player p;
@@ -17,6 +19,7 @@ public class TravelScreen extends JLayeredPane {
 	private boolean backClicked;
 	private int destination = 0;
 	private JTextField pDestination;
+	private Travel t = new Travel();
 	private String[] planetNames = {"Earth","Mars","Jupiter","Saturn","Uranus","Neptune","Pluto"};
 	public TravelScreen(Player p, Player[] pArray) {
 		this.p = p;
@@ -49,6 +52,7 @@ public class TravelScreen extends JLayeredPane {
 		add(backgroundPanel, new Integer(0));
 		add(pName, new Integer(1));
 		
+		
 	}
 	
 	private class PlanetPanel extends JPanel {
@@ -64,15 +68,55 @@ public class TravelScreen extends JLayeredPane {
 	}
 	
 	private class TablePanel extends JPanel {
+		private String[] colNames = {"p","Parts", "Fuel", "Money", "Necessities", "Titanium"};
+		JTextField[][] stats = new JTextField[colNames.length][3];
+		JPanel upper = new JPanel();
+		JPanel lower = new JPanel();
+		JPanel title = new JPanel();
+		int[] needed = t.getTravelRequirements(0, destination);
 		public TablePanel() {
-			setOpaque(true);
-			setBounds(55,400,690,200);
+			setOpaque(false);
+			setBounds(55,400,400,200);
+			title.setOpaque(false);
+			title.setBounds(55,300,300,100);
+			upper.setOpaque(false);
+			lower.setOpaque(false);
+			upper.setBounds(55,400,300,100);
+			upper.setBounds(55,500,300,100);
+			add(title);
+			add(upper);
+			add(lower);
+			stats[0][0] = new JTextField("Planet");
+			stats[0][1] = new JTextField("Required:");
+			stats[0][2] = new JTextField("You have:");
+			for(int i = 1; i < colNames.length;i++) {
+				stats[i][0] = new JTextField(colNames[i]);
+				stats[i][1] = new JTextField("XXXX");
+				stats[i][2] = new JTextField("0");
+			}
+			for(int j = 0; j < 3; j++) {
+				for(int i = 0; i < colNames.length; i++) {
+					System.out.println(j + "," + i);
+					stats[i][j].setBackground(Color.BLACK);
+					stats[i][j].setForeground(Color.yellow);
+					stats[i][j].setFont(font2);
+					stats[i][j].setOpaque(true);
+					stats[i][j].setBounds(0,50,600,45);
+					stats[i][j].setEditable(false);
+					//add(stats[i][j]);
+				}
+			}
+			for(int i = 0; i < colNames.length; i++) {
+				title.add(stats[i][0]);
+				upper.add(stats[i][1]);
+				lower.add(stats[i][2]);
+			}
 		}
 	}
 	private class PlanetButton extends JLabel{
 		public PlanetButton(int planetNum) {
 			super(new ImageIcon("planetIcon" + planetNum + ".png"));
-			if(p.getLocation() + 2 >= planetNum)
+			if(p.getLocation() >= planetNum)
 				setIcon(new ImageIcon("InvalidplanetIcon" + planetNum + ".png"));
 			else 
 				addMouseListener(new MouseAdapter() {
@@ -90,6 +134,7 @@ public class TravelScreen extends JLayeredPane {
 			addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
 					System.out.println("OK clicked");
+					
 					okClicked = true;
 				}
 			});
