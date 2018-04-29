@@ -23,7 +23,8 @@ public class ConfirmTravelScreen extends JLayeredPane{
 	private Font font = new Font(Font.MONOSPACED, Font.PLAIN, 20);
 	private int destination; 
 	private Player currentPlayer;
-	private boolean travelSuccess; 
+	private boolean travelSuccess;
+	private boolean hasEnough = true;
 	
 	public ConfirmTravelScreen(Player currentPlayer, int destination) {
 		this.currentPlayer = currentPlayer;
@@ -45,11 +46,11 @@ public class ConfirmTravelScreen extends JLayeredPane{
 	 * initializes and fills arrays of player name panels and the text fields
 	 */
 	private void initInformationDisplay() {
-		travelInfoPanels = new JPanel[3];
-		travelInfoBoxes = new JTextField[3];	
+		travelInfoPanels = new JPanel[4];
+		travelInfoBoxes = new JTextField[4];	
 		for(int i = 0; i < 4; i++) {
 			travelInfoPanels[i] = new JPanel();
-			travelInfoBoxes[i] = new JTextField(20);
+			travelInfoBoxes[i] = new JTextField(25);
 			travelInfoPanels[i].setOpaque(false);
 			add(travelInfoPanels[i], new Integer(1));
 			travelInfoPanels[i].add(travelInfoBoxes[i]);	
@@ -63,8 +64,17 @@ public class ConfirmTravelScreen extends JLayeredPane{
 		travelInfoBoxes[0].setText("Travel to " + planet);
 		travelInfoBoxes[1].setText("Score: " + currentPlayer.getScore());
 		int probabilityOfSurvival = (int) Math.round(currentPlayer.tryTravel(destination) * 100);
-		travelInfoBoxes[2].setText("Probability of survival: " + probabilityOfSurvival + "%");
-		
+		Travel t = new Travel();
+		int[] required = t.getTravelRequirements(currentPlayer.getLocation(), this.destination);
+		int[] possessed = currentPlayer.getPlayerResources();
+		for(int i = 0; i < possessed.length;i++) {
+			if(required[i] > possessed[i])
+				hasEnough = false;
+		}
+		if(!hasEnough)
+			probabilityOfSurvival *= 0;
+		travelInfoBoxes[2].setText("Probability of survival:");
+		travelInfoBoxes[3].setText(probabilityOfSurvival + "%");
 		
 		travelInfoPanels[0].setBounds(0, 200, 400, 150);
 		travelInfoPanels[1].setBounds(400, 200, 400, 150);
@@ -101,7 +111,7 @@ public class ConfirmTravelScreen extends JLayeredPane{
 	
 	// returns whether travel is successful. should only be used if ok is clicked 
 	public boolean isTravelSuccessful() {
-		return travelSuccess; 
+		return travelSuccess && hasEnough; 
 	}
 	
 	/*

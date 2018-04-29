@@ -83,6 +83,7 @@ public class GatherOrTravelScreen extends JLayeredPane {
 					System.out.println("gather clicked");
 					buttonClicked = true;
 					userGathers = true;
+					System.out.println(userGathers);
 				}
 			});
 		}

@@ -21,6 +21,7 @@ public class TravelScreen extends JLayeredPane {
 	private JTextField pDestination;
 	private Travel t = new Travel();
 	private String[] planetNames = {"Earth","Mars","Jupiter","Saturn","Uranus","Neptune","Pluto"};
+	
 	public TravelScreen(Player p, Player[] pArray) {
 		this.p = p;
 		backgroundPanel = new JLabel(new ImageIcon("backgroundPlanet" + p.getLocation() + ".png"));
@@ -54,6 +55,13 @@ public class TravelScreen extends JLayeredPane {
 		
 		
 	}
+	public int getDestination() {
+		return destination;
+	}
+	
+	public boolean isOkClicked() {
+		return okClicked;
+	}
 	
 	private class PlanetPanel extends JPanel {
 		public PlanetPanel() {
@@ -86,24 +94,24 @@ public class TravelScreen extends JLayeredPane {
 			add(title);
 			add(upper);
 			add(lower);
-			stats[0][0] = new JTextField("Planet");
+			stats[0][0] = new JTextField("---Planet---");	
 			stats[0][1] = new JTextField("Required:");
 			stats[0][2] = new JTextField("You have:");
 			for(int i = 1; i < colNames.length;i++) {
 				stats[i][0] = new JTextField(colNames[i]);
-				stats[i][1] = new JTextField("XXXX");
-				stats[i][2] = new JTextField("0");
+				stats[i][1] = new JTextField(6);
+				stats[i][2] = new JTextField(""+p.getPlayerResources()[i-1]);
+				System.out.print(p.getPlayerResources()[i-1]);
+				
 			}
 			for(int j = 0; j < 3; j++) {
 				for(int i = 0; i < colNames.length; i++) {
-					System.out.println(j + "," + i);
 					stats[i][j].setBackground(Color.BLACK);
 					stats[i][j].setForeground(Color.yellow);
 					stats[i][j].setFont(font2);
 					stats[i][j].setOpaque(true);
 					stats[i][j].setBounds(0,50,600,45);
 					stats[i][j].setEditable(false);
-					//add(stats[i][j]);
 				}
 			}
 			for(int i = 0; i < colNames.length; i++) {
@@ -112,7 +120,16 @@ public class TravelScreen extends JLayeredPane {
 				lower.add(stats[i][2]);
 			}
 		}
+		
+		public void setPlanet(int planetNum) {
+			stats[0][0].setText("-" + planetNames[planetNum]);
+			Travel t = new Travel();
+			for(int i = 1; i < colNames.length; i++) {
+				stats[i][1].setText(""+(t.getTravelRequirements(p.getLocation(), planetNum)[i-1]));
+			}
+		}
 	}
+	
 	private class PlanetButton extends JLabel{
 		public PlanetButton(int planetNum) {
 			super(new ImageIcon("planetIcon" + planetNum + ".png"));
@@ -123,6 +140,8 @@ public class TravelScreen extends JLayeredPane {
 				public void mouseClicked(MouseEvent e) {
 					pDestination.setText("Travel to " + planetNames[planetNum] + "?");
 					System.out.print("planet#" + planetNum);
+					destination = planetNum;
+					tPanel.setPlanet(planetNum);
 				}
 			});
 		}
@@ -134,7 +153,6 @@ public class TravelScreen extends JLayeredPane {
 			addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
 					System.out.println("OK clicked");
-					
 					okClicked = true;
 				}
 			});

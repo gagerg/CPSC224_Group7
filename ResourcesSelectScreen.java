@@ -98,6 +98,7 @@ public class ResourcesSelectScreen extends JLayeredPane{
 		{
 			resourceSelected = true;
 			resource = aResource;
+			currentPlayer.collectResources(aResource);
 		}
 	}
 	

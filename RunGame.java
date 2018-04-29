@@ -22,13 +22,13 @@ public class RunGame {
 	private static int currentPlayer;
 	
 	public static void main(String[] args) {
-		while (true) {
-		//set up frame
 		JFrame frame = new JFrame("Race to Pluto!");
 		frame.setSize(800,600);
 		frame.setLayout(new BorderLayout());
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+		while (true) {
+		//set up frame
 		StartScreen start = new StartScreen();
 		frame.add(start);
 		frame.setVisible(true);
@@ -91,18 +91,22 @@ public class RunGame {
 					c++;
 				}
 				frame.remove(roll);
-				GatherOrTravelScreen choice = new GatherOrTravelScreen(p);
+				GatherOrTravelScreen choice = new GatherOrTravelScreen(p, players);
 				frame.add(choice);
 				frame.setVisible(true);
 				while(!choice.isButtonClicked()) {
 					if(tick(c)) System.out.print(".");
 					c++;
 				}
-				boolean gatherChosen = choice.didUserGather();
+				boolean gatherChosen;
+				gatherChosen = choice.didUserGather();
 				frame.remove(choice);
+				System.out.println(gatherChosen);
+				for(int i = 0; i < 500000000; i++) {int b = 4-4;}
 				if(gatherChosen) {
 					System.out.println("user gathered");
-					ResourcesSelectScreen gather = new ResourcesSelectScreen(p);
+					ResourcesSelectScreen gather;
+					gather = new ResourcesSelectScreen(p);
 					frame.add(gather);
 					frame.setVisible(true);
 					while(!gather.isResourceSelected()) {
@@ -173,6 +177,7 @@ public class RunGame {
 									c++;
 								}
 								frame.remove(winner);
+								//frame.removeAll();
 							}
 						}
 					}
