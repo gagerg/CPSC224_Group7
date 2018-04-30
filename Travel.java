@@ -29,16 +29,30 @@ public class Travel {
     * @throw - no exceptions are thrown by this function 
 	*/
 	public int[] getTravelRequirements(int current, int destination) {
-		int [] requiredResources = REQUIREMENTS[current + 1]; // start with resources required for next planet
-		for (int i = current + 2; i <= destination; i++) { // 
+		int [] requiredResources = REQUIREMENTS[current + 1].clone(); // start with resources required for next planet
+		int baseResources;
+//		System.out.println("Resources for start planet: ");
+//		for (int i = 0; i < requiredResources.length; i++) {
+//			System.out.println(requiredResources[i]);
+//		}
+		for (int i = current + 2; i <= destination; i++) { // if we are traveling 2 or more planets
 			for(int j = 0; j < 5; j++) {
 				requiredResources[j] += REQUIREMENTS[i][j]; // add the resources 
 			}
 		}
-		for (int k = 0; k < 5; k++) {
-			int baseResources= requiredResources[k];
-			baseResources = Math.round(baseResources * ((10 - (destination - current + 1)) / 10)); // subtract 10% resources    
-		}																						  // per planet traveled
+//		System.out.println("Resources with additional planets: ");
+//		for (int i = 0; i < requiredResources.length; i++) {
+//			System.out.println(requiredResources[i]);
+//		}
+		for (int k = 0; k < 5; k++) { // 
+			baseResources = requiredResources[k];
+			baseResources = (int) Math.round(baseResources * ((10.0 - (destination - current - 1)) / 10)); // subtract 10% resources    
+			requiredResources[k] = baseResources; 												// per planet traveled beyond 1
+		}		
+		System.out.println("Resources after 80% deduction ");
+		for (int i = 0; i < requiredResources.length; i++) {
+			System.out.println(requiredResources[i]);
+		}
 		return requiredResources;
 	}
 
