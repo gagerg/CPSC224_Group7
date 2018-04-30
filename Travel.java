@@ -67,7 +67,7 @@ public class Travel {
 	*/
 	public double calculateSuccessRate(int current, int destination, int roll) {
 		double baseProbability = .95 - .15*(destination - current - 1); // moving one planet has a base 95% chance, 
-		double multiplier = roll / 1000;								//-15% for each additional planet 
+		double multiplier = (double)roll / 1000;								//-15% for each additional planet 
 		return baseProbability + baseProbability * multiplier;          // max score is 50 (yahtzee), max chance is 100%    
 	}
 	
