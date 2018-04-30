@@ -14,12 +14,12 @@ import java.awt.*;
 import javax.swing.*;
 
 public class RunGame {
-	private static int numberPlayers; 
-	private static String[] playerNames;
-	private static boolean gameOver;
-	private static Player[] players;
-	private static boolean[] playersAlive;
-	private static int currentPlayer;
+	public static int numberPlayers; 
+	public static String[] playerNames;
+	public static boolean gameOver;
+	public static Player[] players;
+	public static boolean[] playersAlive;
+	public static int currentPlayer;
 	
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("Race to Pluto!");
