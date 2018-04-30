@@ -28,7 +28,8 @@ public class CurrentPlaying extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-
+        
+        if(RunGame.numberPlayers== 4) {
         jTable1.setBackground(new java.awt.Color(153, 51, 255));
         jTable1.setForeground(new java.awt.Color(102, 255, 102));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -41,7 +42,32 @@ public class CurrentPlaying extends javax.swing.JPanel {
             new String [] {
                 "Player", "Parts", "Fuel", "Money", "Necessities", "Titanium", "Location"
             }
-        ));
+        ));} else if(RunGame.numberPlayers == 3) {
+        	jTable1.setBackground(new java.awt.Color(153, 51, 255));
+            jTable1.setForeground(new java.awt.Color(102, 255, 102));
+            jTable1.setModel(new javax.swing.table.DefaultTableModel(
+                new Object [][] {
+                    {RunGame.playerNames[0],RunGame.players[0].getPlayerResources()[0], RunGame.players[0].getPlayerResources()[1], RunGame.players[0].getPlayerResources()[2], RunGame.players[0].getPlayerResources()[3], RunGame.players[0].getPlayerResources()[4], RunGame.players[0].getPlanet()},
+                    {RunGame.playerNames[1],RunGame.players[1].getPlayerResources()[0], RunGame.players[1].getPlayerResources()[1], RunGame.players[1].getPlayerResources()[2], RunGame.players[1].getPlayerResources()[3], RunGame.players[1].getPlayerResources()[4], RunGame.players[1].getPlanet()},
+                    {RunGame.playerNames[2],RunGame.players[2].getPlayerResources()[0], RunGame.players[2].getPlayerResources()[1], RunGame.players[2].getPlayerResources()[2], RunGame.players[2].getPlayerResources()[3], RunGame.players[2].getPlayerResources()[4], RunGame.players[2].getPlanet()}
+                },
+                new String [] {
+                    "Player", "Parts", "Fuel", "Money", "Necessities", "Titanium", "Location"
+                }
+            ));
+        }else {
+        	jTable1.setBackground(new java.awt.Color(153, 51, 255));
+            jTable1.setForeground(new java.awt.Color(102, 255, 102));
+            jTable1.setModel(new javax.swing.table.DefaultTableModel(
+                new Object [][] {
+                    {RunGame.playerNames[0],RunGame.players[0].getPlayerResources()[0], RunGame.players[0].getPlayerResources()[1], RunGame.players[0].getPlayerResources()[2], RunGame.players[0].getPlayerResources()[3], RunGame.players[0].getPlayerResources()[4], RunGame.players[0].getPlanet()},
+                    {RunGame.playerNames[1],RunGame.players[1].getPlayerResources()[0], RunGame.players[1].getPlayerResources()[1], RunGame.players[1].getPlayerResources()[2], RunGame.players[1].getPlayerResources()[3], RunGame.players[1].getPlayerResources()[4], RunGame.players[1].getPlanet()}
+                },
+                new String [] {
+                    "Player", "Parts", "Fuel", "Money", "Necessities", "Titanium", "Location"
+                }
+            ));
+        }
         jTable1.setRowHeight(30);
         jScrollPane1.setViewportView(jTable1);
 
