@@ -145,6 +145,7 @@ public class Player {
     */
     public void collectResources(int resourceType) {
     	resources.addResource(resourceType, currentScore, location);
+    	currentScore = -1; 
     }
     
     
