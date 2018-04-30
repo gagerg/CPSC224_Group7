@@ -39,7 +39,7 @@ public class DeathScreen extends JLayeredPane{
 	 */
 	private void displayDeathMessage() {
 		deathPanel = new JPanel();
-		deathMessage = new JTextField(20);	
+		deathMessage = new JTextField(40);	
 		deathPanel.setOpaque(false);
 		add(deathPanel, new Integer(1));
 		deathPanel.add(deathMessage);	
@@ -47,14 +47,15 @@ public class DeathScreen extends JLayeredPane{
 		deathMessage.setBackground(Color.black);
 		deathMessage.setForeground(Color.yellow);
 		deathMessage.setFont(font);
+		deathMessage.setOpaque(true);
+		deathPanel.setBounds(200, 200, 500, 150);
 		
 		Random gen = new Random();
 		int modeOfDeath = gen.nextInt(); 
 		switch (modeOfDeath) {
 			default:
-					backgroundPanel = new JLabel(new ImageIcon("backgroundPlanet" + "explodingspaceship.png"));
-					deathMessage.setText("Boom! Your spaceship explodes mid-journey! " + name 
-										+ " has died, better luck next time!");
+					backgroundPanel = new JLabel(new ImageIcon("explodingspaceship.png"));
+					deathMessage.setText("Boom! Your spaceship explodes mid-journey!");
 					break;
 		}
 	}
