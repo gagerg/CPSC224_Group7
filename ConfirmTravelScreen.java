@@ -47,12 +47,15 @@
  	private void initInformationDisplay() {
  		travelInfoPanels = new JPanel[3];
  		travelInfoBoxes = new JTextField[3];	
+ 		travelInfoBoxes[0] = new JTextField(20);
+ 		travelInfoBoxes[1] = new JTextField(10);
+ 		travelInfoBoxes[2] = new JTextField(30);
  		for(int i = 0; i < 3; i++) {
  			travelInfoPanels[i] = new JPanel();
- 			travelInfoBoxes[i] = new JTextField(20);
  			travelInfoPanels[i].setOpaque(false);
  			add(travelInfoPanels[i], new Integer(1));
  			travelInfoPanels[i].add(travelInfoBoxes[i]);	
+ 			travelInfoBoxes[i].setOpaque(true);
  			travelInfoBoxes[i].setEditable(false);
  			travelInfoBoxes[i].setBackground(Color.black);
  			travelInfoBoxes[i].setForeground(Color.yellow);
@@ -62,14 +65,13 @@
  		String planet = currentPlayer.getPlanet(destination);
  		travelInfoBoxes[0].setText("Travel to " + planet);
  		travelInfoBoxes[1].setText("Score: " + currentPlayer.getScore());
- 		int probabilityOfSurvival = (int) Math.round(currentPlayer.tryTravel(destination) * 100);
+ 		int probabilityOfSurvival = (int) Math.round(currentPlayer.tryTravel(destination) * 100.0);
  		travelInfoBoxes[2].setText("Probability of survival: " + probabilityOfSurvival + "%");
  		
  		
  		travelInfoPanels[0].setBounds(0, 200, 400, 150);
  		travelInfoPanels[1].setBounds(400, 200, 400, 150);
- 		travelInfoPanels[2].setBounds(0, 350, 400, 150);
- 		travelInfoPanels[3].setBounds(400, 350, 400, 150);
+ 		travelInfoPanels[2].setBounds(0, 350, 600, 200);
  	}
  	
  	
