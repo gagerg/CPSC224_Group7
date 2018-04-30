@@ -14,8 +14,10 @@ public class GatherOrTravelScreen extends JLayeredPane {
 	private boolean buttonClicked = false;
 	private boolean userGathers;
 	private Font font = new Font(Font.MONOSPACED, Font.PLAIN, 30);
+	Player p;
 	
 	public GatherOrTravelScreen(Player p, Player[] pArray) {
+		this.p = p;
 		backgroundPanel = new JLabel(new ImageIcon("backgroundPlanet" + p.getLocation() + ".png"));
 		backgroundPanel.setOpaque(true);
 		backgroundPanel.setBounds(0,0,800,600);
@@ -51,6 +53,7 @@ public class GatherOrTravelScreen extends JLayeredPane {
 	 * so that the program knows that screen to progress to.
 	 */
 	public boolean didUserGather() {
+		System.out.println(userGathers);
 		return userGathers;
 	}
 	
@@ -60,16 +63,17 @@ public class GatherOrTravelScreen extends JLayeredPane {
 	private class TravelButton extends JLabel{
 		public TravelButton() {
 			super(new ImageIcon("TravelButton.png"));
-			addMouseListener(new MouseAdapter() {
-				public void mouseClicked(MouseEvent e) {
-					System.out.println("travel clicked");
-					buttonClicked = true;
-					userGathers = false;
-				}
+			if (!p.checkTravel()) {
+				setIcon(new ImageIcon("InvalidTravel.png"));
+			} else
+				addMouseListener(new MouseAdapter() {
+					public void mouseClicked(MouseEvent e) {
+						System.out.println("travel clicked");
+						buttonClicked = true;
+						userGathers = false;
+					}
 			});
 		}
-		
-		
 	}
 	
 	/*
