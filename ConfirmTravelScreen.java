@@ -11,13 +11,14 @@
  import java.awt.*;
  import java.awt.event.*;
  import javax.swing.*;
+
  
  public class ConfirmTravelScreen extends JLayeredPane{
  	
  	private JLabel backgroundPanel;
  	private JPanel[] travelInfoPanels;
  	private JTextField[] travelInfoBoxes;
- 	private JPanel buttonPanel = new JPanel();
+ 	// private JPanel buttonPanel = new JPanel();
  	private boolean okClicked = false;
  	private boolean remainClicked = false;
  	private Font font = new Font(Font.MONOSPACED, Font.PLAIN, 20);
@@ -34,11 +35,12 @@
  		backgroundPanel.setBounds(0,0,800,600);
  		add(backgroundPanel, new Integer(0));
  		initInformationDisplay();
- 		buttonPanel.setOpaque(false);
- 		buttonPanel.setBounds(600,50,160,90);
- 		buttonPanel.add(new OkButton());
-		buttonPanel.add(new RemainButton());
- 		add(buttonPanel, new Integer(2));
+ 		RemainButton remain = new RemainButton();
+		OkButton okay = new OkButton();
+		remain.setBounds(600, 500, 200, 90);
+		okay.setBounds(600,50,160,90);
+		add(okay, new Integer(1));
+		add(remain, new Integer(1));
  	}
  	
  	/**
@@ -121,6 +123,7 @@
  	private class RemainButton extends JLabel{
  		public RemainButton() {
  			super(new ImageIcon("remainButton.png"));
+ 			setBounds(500, 500, 160, 90);
  			addMouseListener(new MouseAdapter() {
  				public void mouseClicked(MouseEvent e) {
  					System.out.println("Remain clicked");
