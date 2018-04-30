@@ -33,6 +33,8 @@ public class WinnerScreen extends JLayeredPane{
 		buttonPanel.setBounds(600,50,160,90);
 		buttonPanel.add(new OkButton());
 		add(buttonPanel, new Integer(2));
+		PlayerChartButton viewPlayers = new PlayerChartButton();
+		add(viewPlayers, new Integer(1));
 	}
 	
 	/**
