@@ -27,9 +27,11 @@ public class PlayerChartButton extends JLabel {
 			//***********
 			//Player table panel i will be go here similar to
 			//Instructions i = new Instructions();
+                        CurrentPlaying current = new CurrentPlaying();
 			//***********
-			//add(i);
+			add(current);
 			pack();
 		}
 	}
 }
+
