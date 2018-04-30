@@ -39,6 +39,8 @@
 		OkButton okay = new OkButton();
 		remain.setBounds(600, 500, 200, 90);
 		okay.setBounds(600,50,160,90);
+		PlayerChartButton viewPlayers = new PlayerChartButton();
+		add(viewPlayers, new Integer(1));
 		add(okay, new Integer(1));
 		add(remain, new Integer(1));
  	}
