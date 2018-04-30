@@ -6,8 +6,7 @@ import javax.swing.*;
 public class ResourcesSelectScreen extends JLayeredPane{
 
 	private JLabel backgroundPanel;
-	private JPanel buttonPanel = new JPanel();
-	private JPanel emptyPanel = new JPanel(); 
+	private JPanel buttonPanel = new JPanel(); 
 	private Font font = new Font(Font.MONOSPACED, Font.PLAIN, 20);
 	private JButton [] playerResourceButtons;
 	private JTextField scoreDisplay;
@@ -32,7 +31,7 @@ public class ResourcesSelectScreen extends JLayeredPane{
 		initPlayerResourceButtons();
 		
 		buttonPanel.setOpaque(false);
-		buttonPanel.setBounds(200,0,400,600);
+		buttonPanel.setBounds(200, 0, 400, 600);
 		add(buttonPanel, new Integer(2));
 		PlayerChartButton viewPlayers = new PlayerChartButton();
 		add(viewPlayers, new Integer(1));
@@ -50,7 +49,7 @@ public class ResourcesSelectScreen extends JLayeredPane{
 		scoreDisplay.setForeground(Color.yellow);
 		scoreDisplay.setFont(font);
 		scoreDisplay.setOpaque(true);
-		scoreDisplay.setBounds(0, 50, 400, 200);
+		scoreDisplay.setBounds(0, 200, 800, 200);
 		scoreDisplay.setEditable(false);
 		
 		
@@ -60,11 +59,11 @@ public class ResourcesSelectScreen extends JLayeredPane{
 		playerResourceButtons[3] = new JButton("Necessities: " + score + " X " + multipliers[3] + " = " + possibleResources[3]);
 		playerResourceButtons[4] = new JButton("Titanium: " + score + " X " + multipliers[4] + " = " + possibleResources[4]);
 		
-		playerResourceButtons[0].setBounds(0, 150, 400, 200);
-		playerResourceButtons[1].setBounds(400, 150, 400, 200);
-		playerResourceButtons[2].setBounds(0, 275, 400, 200);
-		playerResourceButtons[3].setBounds(400, 275, 400, 200);
-		playerResourceButtons[4].setBounds(0, 400, 400, 200);
+//		playerResourceButtons[0].setBounds(0, 150, 400, 200);
+//		playerResourceButtons[1].setBounds(400, 150, 400, 200);
+//		playerResourceButtons[2].setBounds(0, 275, 400, 200);
+//		playerResourceButtons[3].setBounds(400, 275, 400, 200);
+//		playerResourceButtons[4].setBounds(0, 400, 400, 200);
 		
 		ResourceAction partsAction = new ResourceAction(0);
 		ResourceAction fuelAction = new ResourceAction(1);
@@ -78,9 +77,7 @@ public class ResourcesSelectScreen extends JLayeredPane{
 		playerResourceButtons[3].addActionListener(necessitiesAction);
 		playerResourceButtons[4].addActionListener(titaniumAction);
 	
-		emptyPanel.setBounds(0, 150, 400, 200);
-		buttonPanel.add(scoreDisplay);
-		buttonPanel.add(emptyPanel); //add an empty panel 
+		buttonPanel.add(scoreDisplay); 
 		for (int i = 0; i < 5; i++) {
 			playerResourceButtons[i].setFont(font);
 			buttonPanel.add(playerResourceButtons[i]);
@@ -99,6 +96,7 @@ public class ResourcesSelectScreen extends JLayeredPane{
 			resourceSelected = true;
 			resource = aResource;
 			currentPlayer.collectResources(aResource);
+			System.out.println("Collected resource " + aResource);
 		}
 	}
 	
