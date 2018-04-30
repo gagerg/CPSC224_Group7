@@ -100,9 +100,9 @@ public class RunGame {
 				}
 				boolean gatherChosen;
 				gatherChosen = choice.didUserGather();
-				frame.remove(choice);
 				System.out.println(gatherChosen);
-				for(int i = 0; i < 500000000; i++) {int b = 4-4;}
+				frame.remove(choice);
+				// for(int i = 0; i < 500000000; i++) {int b = 4-4;}
 				if(gatherChosen) {
 					System.out.println("user gathered");
 					ResourcesSelectScreen gather;
