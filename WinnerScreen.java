@@ -24,7 +24,7 @@ public class WinnerScreen extends JLayeredPane{
 	
 	public WinnerScreen(Player currentPlayer) {
 		this.name = currentPlayer.getName();
-		backgroundPanel = new JLabel(new ImageIcon("backgroundPlanet" + currentPlayer.getLocation() + ".png"));
+		backgroundPanel = new JLabel(new ImageIcon("backgroundPlanet6.png"));
 		backgroundPanel.setOpaque(true);
 		backgroundPanel.setBounds(0,0,800,600);
 		add(backgroundPanel, new Integer(0));
@@ -50,6 +50,8 @@ public class WinnerScreen extends JLayeredPane{
 		successMessage.setFont(font);
 		
 		successMessage.setText(name + " is the winner!");
+		
+		successPanel.setBounds(200, 200, 500, 150);
 	}
 	
 	
