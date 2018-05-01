@@ -8,6 +8,9 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class PlayerChartButton extends JLabel {
+	/*
+	* Constructor for the PlayerChartButton, which on click 
+	*/
 	public PlayerChartButton() {
 		super(new ImageIcon("PlayerChartButton.png"));
 		setBounds(320,480,160,90);
@@ -18,7 +21,10 @@ public class PlayerChartButton extends JLabel {
 			}
 		});
 	}
-	
+	/*
+	* PlayerFrame is a frame that contains a panel with all the resource/location information of all players.
+	* when the button is clicked, this frame opens in a new popup window.
+	*/
 	private class PlayerFrame extends JFrame {
 		public PlayerFrame() {
 			super("Player Stats and Locations");
