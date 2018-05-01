@@ -1,7 +1,8 @@
 /*
  * GatherOrTravelScreen.java
- * presents the player with the options to gather resources or travel to another planet
- * By Andrew Brodhead
+ * presents the player with the options to gather resources or travel to another planet. Player can only travel if they have sufficient resources to
+ * travel to a planet.
+ * By Andrew Brodhead, Gage Gutmann, Alexa Andrew
  * V 1.0
  */
 import java.util.*;
@@ -15,7 +16,9 @@ public class GatherOrTravelScreen extends JLayeredPane {
 	private boolean userGathers;
 	private Font font = new Font(Font.MONOSPACED, Font.PLAIN, 30);
 	Player p;
-	
+	/*
+	* Constructor for the GatherOrTravelScreen, takes in a player whose turn it is and the array of all players.
+	*/
 	public GatherOrTravelScreen(Player p, Player[] pArray) {
 		this.p = p;
 		backgroundPanel = new JLabel(new ImageIcon("backgroundPlanet" + p.getLocation() + ".png"));
