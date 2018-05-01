@@ -1,11 +1,10 @@
 /**
  * PlayersSelectScreen.java
  * a JLayered Pane that holds a header line and four panels that allow the user to enter up to four player names
- * by Andrew Brodhead
+ * by Andrew Brodhead, Gage Gutmann, Alexa Andrews
  * V 1.1 - edited 4/19 added okay button and validation for number of players
  * 
  * 
- * to do: ?limit size of player names?
  */
 import java.util.*;
 import java.awt.*;
@@ -22,7 +21,11 @@ public class PlayersSelectScreen extends JLayeredPane{
 	private JPanel buttonPanel = new JPanel();
 	private boolean okClicked = false;
 	private Font font = new Font(Font.MONOSPACED, Font.PLAIN, 20);
-	
+	/*
+	* constructor for PlayersSelectScreen, displays to the user four boxes in which player names can be entered. Empty
+	* text fields will not add to the number of players, and the user cannot proceed without naming at least
+	* two players.
+	*/
 	public PlayersSelectScreen() {
 		backgroundPanel = new JLabel(new ImageIcon("pselectbackground.png"));
 		backgroundPanel.setOpaque(true);
