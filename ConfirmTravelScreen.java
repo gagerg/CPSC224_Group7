@@ -23,7 +23,9 @@
  	private int destination; 
  	private Player currentPlayer;
  	private boolean travelSuccess; 
- 	
+ 	/*
+	* Constructor for the Confirm Travel Screen, takes in a player object whose turn it is and the destination the player chose to travel to.
+	*/
  	public ConfirmTravelScreen(Player currentPlayer, int destination) {
  		this.currentPlayer = currentPlayer;
  		this.destination = destination; 
