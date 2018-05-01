@@ -21,7 +21,10 @@ public class TravelScreen extends JLayeredPane {
 	private JTextField pDestination;
 	private Travel t = new Travel();
 	private String[] planetNames = {"Earth","Mars","Jupiter","Saturn","Uranus","Neptune","Pluto"};
-	
+	/*
+	* constructor for TravelScreen class, takes in a player object for the current player whose turn it is and the array of all 
+	* current players.
+	*/
 	public TravelScreen(Player p, Player[] pArray) {
 		this.p = p;
 		backgroundPanel = new JLabel(new ImageIcon("backgroundPlanet" + p.getLocation() + ".png"));
@@ -55,14 +58,24 @@ public class TravelScreen extends JLayeredPane {
 		
 		
 	}
+	/*
+	* gets the destination from the button the user clicked.
+	* returns and integer corresponding to a planet
+	*/
 	public int getDestination() {
 		return destination;
 	}
-	
+	/*
+	* gets whether or not the player validly clicked to continue on
+	* returns a boolean for the main program loop to check
+	*/
 	public boolean isOkClicked() {
 		return okClicked;
 	}
 	
+	/*
+	* A panel that houses all of the planet buttons so that they appear in an organized layout for the user
+	*/
 	private class PlanetPanel extends JPanel {
 		public PlanetPanel() {
 			setOpaque(false);
@@ -75,6 +88,10 @@ public class TravelScreen extends JLayeredPane {
 		}
 	}
 	
+	/*
+	* A panel that houses a set of Text field to display to the user their current resources and the required resources for
+	* the selected planet.
+	*/
 	private class TablePanel extends JPanel {
 		private String[] colNames = {"p","Parts", "Fuel", "Money", "Necessities", "Titanium"};
 		JTextField[][] stats = new JTextField[colNames.length][3];
@@ -120,7 +137,10 @@ public class TravelScreen extends JLayeredPane {
 				lower.add(stats[i][2]);
 			}
 		}
-		
+		/*
+		* sets the textfield information to reflect the valid planet button that the user has clicked.
+		* takes in an integer index of the planet the user chose.
+		*/
 		public void setPlanet(int planetNum) {
 			stats[0][0].setText("-" + planetNames[planetNum]);
 			Travel t = new Travel();
@@ -130,6 +150,10 @@ public class TravelScreen extends JLayeredPane {
 		}
 	}
 	
+	/*
+	* An image label with an attached mouseAction that, when clicked and is a valid planet for the player to travel to, 
+	* sets the table to display required resources and allows the player to continue in travelling to the selected planet.
+	*/
 	private class PlanetButton extends JLabel{
 		public PlanetButton(int planetNum) {
 			super(new ImageIcon("planetIcon" + planetNum + ".png"));
@@ -147,6 +171,9 @@ public class TravelScreen extends JLayeredPane {
 		}
 	}
 	
+	/*
+	* A button that allows the user, when a valid planet is selected, to continue onto the next frame.
+	*/
 	private class OkButton extends JLabel{
 		public OkButton() {
 			super(new ImageIcon("okButton.png"));
