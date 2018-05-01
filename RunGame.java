@@ -91,6 +91,7 @@ public class RunGame {
 					c++;
 				}
 				frame.remove(roll);
+				p.rollDice();
 				GatherOrTravelScreen choice = new GatherOrTravelScreen(p, players);
 				frame.add(choice);
 				frame.setVisible(true);
@@ -165,7 +166,10 @@ public class RunGame {
 							frame.remove(deathfully);
 							int alive = 0;
 							for (int i = 0; i < numberPlayers; i++) {
-								if (players[i].getLocation() >= 0) alive++;
+								if (players[i].getLocation() >= 0) {
+									alive++;
+									p = players[i];
+								}
 							}
 							if (alive == 1) {
 								gameOver = true;

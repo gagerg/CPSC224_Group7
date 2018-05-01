@@ -34,10 +34,10 @@ public class CurrentPlaying extends javax.swing.JPanel {
         jTable1.setForeground(new java.awt.Color(102, 255, 102));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {RunGame.playerNames[0],RunGame.players[0].getPlayerResources()[0], RunGame.players[0].getPlayerResources()[1], RunGame.players[0].getPlayerResources()[2], RunGame.players[0].getPlayerResources()[3], RunGame.players[0].getPlayerResources()[4], RunGame.players[0].getPlanet()},
-                {RunGame.playerNames[1],RunGame.players[1].getPlayerResources()[0], RunGame.players[1].getPlayerResources()[1], RunGame.players[1].getPlayerResources()[2], RunGame.players[1].getPlayerResources()[3], RunGame.players[1].getPlayerResources()[4], RunGame.players[1].getPlanet()},
-                {RunGame.playerNames[2],RunGame.players[2].getPlayerResources()[0], RunGame.players[2].getPlayerResources()[1], RunGame.players[2].getPlayerResources()[2], RunGame.players[2].getPlayerResources()[3], RunGame.players[2].getPlayerResources()[4], RunGame.players[2].getPlanet()},
-                {RunGame.playerNames[3],RunGame.players[3].getPlayerResources()[0], RunGame.players[3].getPlayerResources()[1], RunGame.players[3].getPlayerResources()[2], RunGame.players[3].getPlayerResources()[3], RunGame.players[3].getPlayerResources()[4], RunGame.players[3].getPlanet()}
+                {RunGame.players[0].getName(),RunGame.players[0].getPlayerResources()[0], RunGame.players[0].getPlayerResources()[1], RunGame.players[0].getPlayerResources()[2], RunGame.players[0].getPlayerResources()[3], RunGame.players[0].getPlayerResources()[4], RunGame.players[0].getPlanet()},
+                {RunGame.players[1].getName(),RunGame.players[1].getPlayerResources()[0], RunGame.players[1].getPlayerResources()[1], RunGame.players[1].getPlayerResources()[2], RunGame.players[1].getPlayerResources()[3], RunGame.players[1].getPlayerResources()[4], RunGame.players[1].getPlanet()},
+                {RunGame.players[2].getName(),RunGame.players[2].getPlayerResources()[0], RunGame.players[2].getPlayerResources()[1], RunGame.players[2].getPlayerResources()[2], RunGame.players[2].getPlayerResources()[3], RunGame.players[2].getPlayerResources()[4], RunGame.players[2].getPlanet()},
+                {RunGame.s,RunGame.players[3].getPlayerResources()[0], RunGame.players[3].getPlayerResources()[1], RunGame.players[3].getPlayerResources()[2], RunGame.players[3].getPlayerResources()[3], RunGame.players[3].getPlayerResources()[4], RunGame.players[3].getPlanet()}
             },
             new String [] {
                 "Player", "Parts", "Fuel", "Money", "Necessities", "Titanium", "Location"
@@ -47,9 +47,9 @@ public class CurrentPlaying extends javax.swing.JPanel {
             jTable1.setForeground(new java.awt.Color(102, 255, 102));
             jTable1.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {
-                    {RunGame.playerNames[0],RunGame.players[0].getPlayerResources()[0], RunGame.players[0].getPlayerResources()[1], RunGame.players[0].getPlayerResources()[2], RunGame.players[0].getPlayerResources()[3], RunGame.players[0].getPlayerResources()[4], RunGame.players[0].getPlanet()},
-                    {RunGame.playerNames[1],RunGame.players[1].getPlayerResources()[0], RunGame.players[1].getPlayerResources()[1], RunGame.players[1].getPlayerResources()[2], RunGame.players[1].getPlayerResources()[3], RunGame.players[1].getPlayerResources()[4], RunGame.players[1].getPlanet()},
-                    {RunGame.playerNames[2],RunGame.players[2].getPlayerResources()[0], RunGame.players[2].getPlayerResources()[1], RunGame.players[2].getPlayerResources()[2], RunGame.players[2].getPlayerResources()[3], RunGame.players[2].getPlayerResources()[4], RunGame.players[2].getPlanet()}
+                    {RunGame.players[0].getName(),RunGame.players[0].getPlayerResources()[0], RunGame.players[0].getPlayerResources()[1], RunGame.players[0].getPlayerResources()[2], RunGame.players[0].getPlayerResources()[3], RunGame.players[0].getPlayerResources()[4], RunGame.players[0].getPlanet()},
+                    {RunGame.players[1].getName(),RunGame.players[1].getPlayerResources()[0], RunGame.players[1].getPlayerResources()[1], RunGame.players[1].getPlayerResources()[2], RunGame.players[1].getPlayerResources()[3], RunGame.players[1].getPlayerResources()[4], RunGame.players[1].getPlanet()},
+                    {RunGame.players[2].getName(),RunGame.players[2].getPlayerResources()[0], RunGame.players[2].getPlayerResources()[1], RunGame.players[2].getPlayerResources()[2], RunGame.players[2].getPlayerResources()[3], RunGame.players[2].getPlayerResources()[4], RunGame.players[2].getPlanet()}
                 },
                 new String [] {
                     "Player", "Parts", "Fuel", "Money", "Necessities", "Titanium", "Location"
@@ -60,8 +60,8 @@ public class CurrentPlaying extends javax.swing.JPanel {
             jTable1.setForeground(new java.awt.Color(102, 255, 102));
             jTable1.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {
-                    {RunGame.playerNames[0],RunGame.players[0].getPlayerResources()[0], RunGame.players[0].getPlayerResources()[1], RunGame.players[0].getPlayerResources()[2], RunGame.players[0].getPlayerResources()[3], RunGame.players[0].getPlayerResources()[4], RunGame.players[0].getPlanet()},
-                    {RunGame.playerNames[1],RunGame.players[1].getPlayerResources()[0], RunGame.players[1].getPlayerResources()[1], RunGame.players[1].getPlayerResources()[2], RunGame.players[1].getPlayerResources()[3], RunGame.players[1].getPlayerResources()[4], RunGame.players[1].getPlanet()}
+                    {RunGame.players[0].getName(),RunGame.players[0].getPlayerResources()[0], RunGame.players[0].getPlayerResources()[1], RunGame.players[0].getPlayerResources()[2], RunGame.players[0].getPlayerResources()[3], RunGame.players[0].getPlayerResources()[4], RunGame.players[0].getPlanet()},
+                    {RunGame.players[1].getName(),RunGame.players[1].getPlayerResources()[0], RunGame.players[1].getPlayerResources()[1], RunGame.players[1].getPlayerResources()[2], RunGame.players[1].getPlayerResources()[3], RunGame.players[1].getPlayerResources()[4], RunGame.players[1].getPlanet()}
                 },
                 new String [] {
                     "Player", "Parts", "Fuel", "Money", "Necessities", "Titanium", "Location"
