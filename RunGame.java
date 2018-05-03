@@ -91,6 +91,7 @@ public class RunGame {
 					c++;
 				}
 				frame.remove(roll);
+				p.rollDice();
 				GatherOrTravelScreen choice = new GatherOrTravelScreen(p, players);
 				frame.add(choice);
 				frame.setVisible(true);
@@ -165,10 +166,11 @@ public class RunGame {
 							frame.remove(deathfully);
 							int alive = 0;
 							for (int i = 0; i < numberPlayers; i++) {
-								if (players[i].getLocation() >= 0) alive++;
-							}
-							if (alive == 1) {
-								gameOver = true;
+								if (players[i].getLocation() >= 0) {
+									alive++;
+									p = players[i]; // if only one player is alive we know who it is. otherwise, this
+								}					// currentPlayer is used to determine the next player and p will be 
+								gameOver = true;	// reset next while operation if more than one is alive
 								WinnerScreen winner = new WinnerScreen(p);
 								frame.add(winner);
 								frame.setVisible(true);
@@ -177,7 +179,6 @@ public class RunGame {
 									c++;
 								}
 								frame.remove(winner);
-								//frame.removeAll();
 							}
 						}
 					}
