@@ -5,10 +5,11 @@
  * retrieve the current roll, and retrieve the number of sides.
  * This class implements Comparable such that a collection of Dice
  * may be sorted based on the current roll on each die. 
+ * A setDice function exists for testing purposes 
  * Journey to Pluto
  * @authors Alexa Andrews, Gate Gutmann, Andrew Brodhead 
  * Date Created: March 7 2018
- * Last Modified: April 14, 2018
+ * Last Modified: April 25, 2018
 */
 
 import java.util.*;
@@ -77,4 +78,16 @@ public class Dice implements Comparable{
 	public int getSides() {
 		return sides;
 	}
+	
+    /* 
+     * This function sets the number of sides
+     * Used for testing purposes 
+     * @parameters int representing the number of sides
+     * @returns 
+     * @throw - no exceptions are thrown by this function
+     */
+	public void setDice(int value) {
+		faceUp = value;
+	}
 }
+
