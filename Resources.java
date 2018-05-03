@@ -5,17 +5,17 @@
  * Journey to Pluto
  * @authors Alexa Andrews, Gate Gutmann, Andrew Brodhead 
  * Date Created: April 14 2018
- * Last Modified: April 14 2018
+ * Last Modified: April 25 2018
 */
 
 public class Resources {
 	private final static int [][] MULTIPLIERS = {
-										{2, 5, 5, 4, 2}, // multipliers for earth
-										{3, 3, 1, 3, 3}, // multipliers for Mars
-										{2, 7, 2, 7, 4}, // multipliers or Jupiter
-										{5, 7, 5, 4, 6}, // multipliers for Saturn
+										{8, 5, 11, 7, 5}, // multipliers for earth
+										{3, 11, 4, 3, 6}, // multipliers for Mars
+										{11, 7, 2, 7, 4}, // multipliers or Jupiter
+										{5, 7, 5, 11, 6}, // multipliers for Saturn
 										{9, 6, 7, 2, 7}, // multipliers for Uranus
-										{5, 2, 3, 6, 2}, // multipliers for Neptune
+										{5, 2, 2, 6, 11}, // multipliers for Neptune
 										{0, 0, 0, 0, 0} // no multipliers for Pluto
 									};
 	private int [] resources; 
@@ -67,7 +67,7 @@ public class Resources {
 	/* This method checks to ensure a player has enough resources to travel
 	 * @parameters an integer array representing the necessary resources for travel
 	 * @returns a boolean true if the player has sufficient resources, false if otherwise
-	 * @throw - no excepions are thrown by this function
+	 * @throw - no exceptions are thrown by this function
 	 */
 	public boolean canTravel(int [] necessaryResources) {
 		boolean allowTravel = true;
@@ -93,6 +93,12 @@ public class Resources {
 		}	
 	}
 	
+	/* This method gives its user the current resources 
+	 * @parameters none
+	 * @returns an integer array representing the current Resources 
+	 * 			Resources are: parts > fuel > money > necessities > titanium
+	 * @throw - no exceptions are thrown by this function
+	 */
 	public int [] getCurrentResources () {
 		return resources;
 	}
