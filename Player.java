@@ -1,20 +1,20 @@
 /* 
- * The class Player simulates a Player in the game of Yahtzee. In a full
- * game there could be multiple players and each will have a name. For now,
- * each has a Scores and a collection of Dice. The number of dice and the
- * amount of sides for each Dice are determined when the Player is constructed. 
+ * The class Player simulates a Player in the game of Space Travel Yahtzee. 
+ * Each has a Scores, Travel, Resources, and a collection of Dice, as well as a name. 
+ * The number of dice and the amount of sides for each Dice are determined 
+ * by final integers 
  * The player can roll their collection of dice all at once or excluding specific 
- * ones based on an input string and can take a turn in Yahtzee. 
+ * ones based on a boolean array. They can get their score, see all possible resources
+ * at their planet, collect a resource, check if they have enough resources to trave,
+ * check what their probability of success is for travel, and attempt travel
  * Journey to Pluto
  * @authors Alexa Andrews, Gate Gutmann, Andrew Brodhead 
  * Date Created: March 7 2018
- * Last Modified: April 14 2018
+ * Last Modified: April 30, 2018
 */
 
 import java.util.Arrays;
 import java.util.Scanner;
-
-
 
 
 public class Player {
@@ -91,8 +91,8 @@ public class Player {
     
     // all dice must be rolled before this method is called
     /* 
-    * This function first sorts the Dice then scores them using its Scores.
-    * It saves the highest score in currentScore 
+    * This function first scores the Dice if they haven't been scored 
+	* Whether have been scored previously or not it will return the score
     * @parameters none
     * @returns the highest Score 
     * @throw - no exceptions are thrown by this function
@@ -102,6 +102,14 @@ public class Player {
         return currentScore;
     }  	
     
+    // all dice must be rolled before this method is called
+    /* 
+    * This function first sorts the Dice then scores them using its Scores.
+    * It saves the highest score in currentScore 
+    * @parameters none
+    * @returns nothing
+    * @throw - no exceptions are thrown by this function
+    */
     private void calculateScore() {
     	Arrays.sort(dice); // must sort for scoreDice to work properly
         currentScore = score.scoreDice(dice);  
