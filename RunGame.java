@@ -1,7 +1,7 @@
 /**
- * RunGame.java - JUST A TEST, not final main program
- * runs a test to simulate game flow from one screen to the next
- * By Andrew Brodhead
+ * RunGame.java
+ * runs a loop to manage game flow from one screen to the next
+ * By Andrew Brodhead, Alexa Andrews, Gage Gutmann
  * V1.2 - edited 4/18 added player select screen
  * 		- edited 4/19 added ok from  ^ button to continue to first turn
  * 		- edited 4/19 added RollScreen
@@ -212,8 +212,11 @@ public class RunGame {
 	}
 	
 	/*
-	 * This function won't be in the actual game.java file, just used for outputting test messages between
-	 * events.
+	 * This function is used to determine whether or not a time-burning while loop should output a period onto the console.
+	 * This function has no purpose other than for debugging and outputting program status onto the console
+	 * Takes in an integer counter that is used to determine whether or not 2,000,000,000 cycles of the while loop have been
+	 * burned
+	 * returns a boolean whether or not 2 billion cycles have passed.
 	 */
 	public static boolean tick(int counter) {
 		//outputs a wait message every 200000000 loop cycles, kind of cpu expensive.
@@ -228,6 +231,8 @@ public class RunGame {
 	
 	/*
 	 * This function takes in an reference to an array of Player objects and shuffles it randomly to determine turn order.
+	 * Takes in an array of players that are in the order they were entered by the user
+	 * outputs a new array of players in a randomly shuffled order.
 	 */
 	public static void shufflePlayers(Player[] pArray) {
 		List<Player> p = Arrays.asList(pArray);
