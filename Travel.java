@@ -5,7 +5,7 @@
  * Journey to Pluto
  * @authors Alexa Andrews, Gate Gutmann, Andrew Brodhead 
  * Date Created: April 14 2018
- * Last Modified: April 14 2018
+ * Last Modified: April 30 2018
 */
 
 import java.util.Random; 
@@ -31,28 +31,19 @@ public class Travel {
 	public int[] getTravelRequirements(int current, int destination) {
 		int [] requiredResources = REQUIREMENTS[current + 1].clone(); // start with resources required for next planet
 		int baseResources;
-//		System.out.println("Resources for start planet: ");
-//		for (int i = 0; i < requiredResources.length; i++) {
-//			System.out.println(requiredResources[i]);
-//		}
+
 		for (int i = current + 2; i <= destination; i++) { // if we are traveling 2 or more planets
 			for(int j = 0; j < 5; j++) {
 				requiredResources[j] += REQUIREMENTS[i][j]; // add the resources 
 			}
 		}
-//		System.out.println("Resources with additional planets: ");
-//		for (int i = 0; i < requiredResources.length; i++) {
-//			System.out.println(requiredResources[i]);
-//		}
+
 		for (int k = 0; k < 5; k++) { // 
 			baseResources = requiredResources[k];
 			baseResources = (int) Math.round(baseResources * ((10.0 - (destination - current - 1)) / 10)); // subtract 10% resources    
 			requiredResources[k] = baseResources; 												// per planet traveled beyond 1
 		}		
-		System.out.println("Resources after 80% deduction ");
-		for (int i = 0; i < requiredResources.length; i++) {
-			System.out.println(requiredResources[i]);
-		}
+
 		return requiredResources;
 	}
 
@@ -71,6 +62,13 @@ public class Travel {
 		return baseProbability + baseProbability * multiplier;          // max score is 50 (yahtzee), max chance is 100%    
 	}
 	
+	
+    /* This method takes in a success rate to find out if the player 
+     * survives to journey 
+    * @parameters A double representing the successRate
+    * @returns a boolean true if successful, false if death
+    * @throw - no exceptions are thrown by this function 
+	*/
 	public boolean attemptTravel(double successRate) {
 		Random numGenerator = new Random();
 		double chance = numGenerator.nextDouble();  // returns a random integer 0 - .99 
