@@ -1,11 +1,11 @@
 /**
  * WinnerScreen.java
  * Displays a congratulatory message to the winner
- * by Andrew Brodhead
+ * by Andrew Brodhead, Alexa Andrews, Gage Gutmann
  * V 1.1 - edited 4/19 added okay button and validation for number of players
+ * V 1.2 - added additional comments and changes
  * 
  * 
- * to do: ?limit size of player names?
  */
 import java.util.*;
 import java.awt.*;
@@ -14,6 +14,7 @@ import javax.swing.*;
 
 public class WinnerScreen extends JLayeredPane{
 	
+	//Variable declaration
 	private JLabel backgroundPanel;
 	private JPanel successPanel;
 	private JTextField successMessage;
