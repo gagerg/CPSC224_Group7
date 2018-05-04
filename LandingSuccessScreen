@@ -1,11 +1,11 @@
 /**
  * LandingSuccessScreen.java
  * a JLayered Pane that holds a panel containing a success message 
- * by Andrew Brodhead
+ * by Andrew Brodhead, Gage Gutmann, Alexa Andrews
  * V 1.1 - edited 4/19 added okay button and validation for number of players
+ * V 1.2 - added additional comments
  * 
  * 
- * to do: ?limit size of player names?
  */
 import java.util.*;
 import java.awt.*;
@@ -14,6 +14,7 @@ import javax.swing.*;
 
 public class LandingSuccessScreen extends JLayeredPane{
 	
+	//Variable declarations
 	private JLabel backgroundPanel;
 	private JPanel successPanel;
 	private JTextField successMessage;
