@@ -3,8 +3,16 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class ResourcesSelectScreen extends JLayeredPane{
+/**
+* This class creates a layered pane which displays the score and the resources that you are able to select, altered with
+* the specific multipliers that are exclusive to each planet
 
+*@authors Andrew Brodhead, Alexa Andrews, Gage Gutmann
+**/
+
+public class ResourcesSelectScreen extends JLayeredPane{
+	
+	//Variable initialization
 	private JLabel backgroundPanel;
 	private JPanel buttonPanel = new JPanel(); 
 	private Font font = new Font(Font.MONOSPACED, Font.PLAIN, 20);
@@ -84,6 +92,8 @@ public class ResourcesSelectScreen extends JLayeredPane{
 		}
 		
 	}
+	
+	//Performs the action of collecting 
 	private class ResourceAction implements ActionListener {
 		private int aResource; 
 		
@@ -100,10 +110,12 @@ public class ResourcesSelectScreen extends JLayeredPane{
 		}
 	}
 	
+	//Sees which resource is selected
 	public boolean isResourceSelected() {
 		return resourceSelected;
 	}
 	
+	//Gets the resource
 	public int getResource() {
 		return resource;
 	}
