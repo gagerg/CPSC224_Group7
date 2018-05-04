@@ -1,11 +1,11 @@
 /**
  * DeathScreen.java
  * a screen telling the player how they died 
- * by Andrew Brodhead
+ * by Andrew Brodhead, Gage Gutmann, Alexa Andrews
  * V 1.1 - edited 4/19 added okay button and validation for number of players
+ * V 1.2 - Added additional comments 5/3/18
  * 
  * 
- * to do: ?limit size of player names?
  */
 import java.util.*;
 import java.awt.*;
@@ -14,6 +14,7 @@ import javax.swing.*;
 
 public class DeathScreen extends JLayeredPane{
 	
+	//Variable declaration
 	private JLabel backgroundPanel;
 	private JPanel deathPanel;
 	private JTextField deathMessage;
