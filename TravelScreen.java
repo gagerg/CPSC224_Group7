@@ -16,7 +16,7 @@ public class TravelScreen extends JLayeredPane {
 	private Player p;
 	private TablePanel tPanel;
 	private boolean okClicked;
-	private boolean backClicked;
+	private boolean planetClicked;
 	private int destination = 0;
 	private JTextField pDestination;
 	private Travel t = new Travel();
@@ -166,6 +166,7 @@ public class TravelScreen extends JLayeredPane {
 					System.out.print("planet#" + planetNum);
 					destination = planetNum;
 					tPanel.setPlanet(planetNum);
+					planetClicked = true; 
 				}
 			});
 		}
@@ -179,8 +180,10 @@ public class TravelScreen extends JLayeredPane {
 			super(new ImageIcon("okButton.png"));
 			addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
-					System.out.println("OK clicked");
-					okClicked = true;
+					if (planetClicked) {
+						System.out.println("OK clicked");
+						okClicked = true;
+					}
 				}
 			});
 		}
